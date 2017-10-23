@@ -1,0 +1,37 @@
+// CTRL + Enter - novi task
+// CTRL + D     - zavrsen task
+
+ADMIN PANEL:
+   ☐ Middleware 
+  Dashboard:
+   ☐ Registered useres
+   ☐ Number of posts
+   ☐ -||-   of original posts
+   ☐ Activity graph
+   ☐ Social network likes
+   ...
+  Users:
+   ☐ Last active
+   ☐ Ban/Unban user
+   ☐ Send message
+  Posts:
+   ☐ Delete
+   ☐ Edit every field
+  Categories:
+   ☐ Approve/Reject
+   ☐ Edit every field
+
+
+
+
+FRONT PAGE:
+
+LOGIC:
+ ☐ Inbox
+ ☐ Notifications
+
+OTHER:
+ ☐ Datatables
+ ☐ Comments
+
+

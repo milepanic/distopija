@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -37,7 +40,8 @@ class HomeController extends Controller
     }
 
 
-    //admin routes
+    // ADMIN ROUTES
+
     public function dashboard()
     {
         return view('admin.dashboard');
@@ -45,17 +49,22 @@ class HomeController extends Controller
 
     public function users()
     {
-        return view('admin.users');
+        $users = User::all();
+        
+        return view('admin.users', compact('users'));;
     }
 
     public function posts()
     {
-        return view('admin.posts');
+        $posts = Post::all();
+        return view('admin.posts', compact('posts'));
     }
 
     public function categories()
     {
-        return view('admin.categories');
+        $categories = Category::all();
+
+        return view('admin.categories', compact('categories'));
     }
 
     public function medals()
