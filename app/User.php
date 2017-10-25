@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -30,5 +31,13 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany('App\Post');
+    }
+
+    public function isBanned()
+    {
+        if($this->banned_until && Carbon::now() <= $this->banned_until)
+            return true;
+        else
+            return false;
     }
 }

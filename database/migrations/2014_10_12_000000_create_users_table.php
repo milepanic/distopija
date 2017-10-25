@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('admin')->default(0);
             $table->integer('points')->default(0);
+            $table->date('banned_until')->nullable();
+            $table->string('ban_message')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -26,7 +26,12 @@
 	                        @foreach($users as $user)
 
 	                            <tr>
-	                                <td>{{ $user->name }}</td>
+	                                <td @if($user->banned_until)
+	                                		class="text-danger"
+	                                	@endif
+	                                >
+	                                	{{ $user->name }}
+	                                </td>
 	                                <td>{{ $user->points }}</td>
 	                                <td>
 	                                	{{ \Carbon\Carbon::parse($user->created_at)->diffForHumans() }}
@@ -36,7 +41,16 @@
 	                                		Coming Soon
 	                                	</a>
 	                                </td>
-	                                <td>Coming Soon</td>
+	                                <td>
+	                                	<a class="text-danger" title="Ban user {{ $user->name }}"
+	                                		href="users/ban/{{ $user->id }}">
+	                                		<i class="fa fa-ban" aria-hidden="true"></i>
+	                                	</a>&nbsp;
+	                                	<a class="text-success" title="Unban user {{ $user->name }}"
+	                                		href="users/unban/{{ $user->id }}">
+	                                		<i class="fa fa-check" aria-hidden="true"></i>
+	                                	</a>
+	                                </td>
 	                            </tr>
 
 							@endforeach
