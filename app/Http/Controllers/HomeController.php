@@ -44,12 +44,16 @@ class HomeController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $userCount = User::count();
+        $postCount = Post::count();
+        $originalPostCount = Post::where('original', '=', '1')->count();
+
+        return view('admin.dashboard', compact('userCount', 'postCount', 'originalPostCount'));
     }
 
     public function users()
     {
-        $users = User::all();
+        $users = User::count();
         
         return view('admin.users', compact('users'));;
     }

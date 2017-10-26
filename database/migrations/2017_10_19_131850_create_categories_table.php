@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration
             $table->tinyInteger('pictures')->nullable();
             $table->tinyInteger('videos')->nullable();
             $table->tinyInteger('approved')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

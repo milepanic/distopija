@@ -19,4 +19,35 @@ class CategoryController extends Controller
 
     	return redirect('create');
     }
+
+    public function approve($id)
+    {
+        $category = Category::find($id);
+
+        $category->approved = 2;
+
+        $category->save();
+
+        return redirect()->back();
+    }
+
+    public function reject($id)
+    {
+        $category = Category::find($id);
+
+        $category->approved = 1;
+
+        $category->save();
+
+        return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        $category = Category::find($id);
+
+        $category->delete();
+
+        return redirect()->back();
+    }
 }

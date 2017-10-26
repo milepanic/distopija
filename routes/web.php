@@ -27,13 +27,19 @@ Route::group(['middleware' => 'banned'], function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
-	Route::get('/', 'HomeController@dashboard');
+	Route::get('/', 'HomeController@dashboard')->name('Dashboard');
 	
-	Route::get('users', 'HomeController@users');
+	Route::get('users', 'HomeController@users')->name('Users');
 	Route::get('users/ban/{id}', 'UserController@banUser');
 	Route::get('users/unban/{id}', 'UserController@unbanUser');
 
-	Route::get('posts', 'HomeController@posts');
-	Route::get('categories', 'HomeController@categories');
-	Route::get('medals', 'HomeController@medals');
+	Route::get('posts', 'HomeController@posts')->name('Posts');
+	Route::get('posts/delete/{id}', 'PostController@delete');
+
+	Route::get('categories', 'HomeController@categories')->name('Categories');
+	Route::get('categories/approve/{id}', 'CategoryController@approve');
+	Route::get('categories/reject/{id}', 'CategoryController@reject');
+	Route::get('categories/delete/{id}', 'CategoryController@delete');
+
+	Route::get('medals', 'HomeController@medals')->name('Medals');
 });

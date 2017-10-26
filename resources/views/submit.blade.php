@@ -10,7 +10,7 @@
 
 		Write joke:<br>
 		<textarea name="content" cols="30" rows="10"></textarea><br>
-		<select name="category">
+		<select name="category" required>
 			<option value="" selected disabled hidden>Izaberi kategoriju</option>
 			<option value="Kategorija 1">kat 1</option>
 			<option value="Kategorija 2">kat 2</option>

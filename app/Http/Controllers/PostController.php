@@ -21,4 +21,13 @@ class PostController extends Controller
 
     	return redirect('submit');
     }
+
+    public function delete($id)
+    {
+        $post = Post::find($id);
+
+        $post->delete();
+
+        return redirect()->back();
+    }
 }

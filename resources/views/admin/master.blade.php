@@ -12,9 +12,6 @@
         <!-- Bootstrap Core CSS -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-        <!-- MetisMenu CSS -->
-        <link href="{{ asset('css/metisMenu.min.css') }}" rel="stylesheet">
-
         <!-- Timeline CSS -->
         <link href="{{ asset('css/timeline.css') }}" rel="stylesheet">
 
@@ -27,7 +24,13 @@
         <!-- Custom Fonts -->
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
 
+        <!-- Font Awesome -->
         <script src="https://use.fontawesome.com/94a3cab706.js"></script>
+
+        <!-- DataTables CSS -->
+        <link href="{{ asset('css/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
+        <!-- DataTables Responsive CSS -->
+        <link href="{{ asset('css/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
     </head>
     <body>
 
@@ -113,7 +116,7 @@
             <div id="page-wrapper">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Dashboard</h1>
+                        <h1 class="page-header"> {{ Route::currentRouteName() }} </h1>
                     </div>
                 </div>
                 <div class="row">
@@ -133,9 +136,6 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
-        <!-- Metis Menu Plugin JavaScript -->
-        <script src="{{ asset('js/metisMenu.min.js') }}"></script>
-
         <!-- Morris Charts JavaScript -->
         <script src="{{ asset('js/raphael.min.js') }}"></script>
         <script src="{{ asset('js/morris.min.js') }}"></script>
@@ -143,6 +143,18 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="{{ asset('js/startmin.js') }}"></script>
+
+        <!-- DataTables JavaScript -->
+        <script src="{{ asset('js/dataTables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('js/dataTables/dataTables.bootstrap.min.js') }}"></script>
+
+        <script>
+            $(document).ready(function() {
+                $('#dataTable').DataTable({
+                        responsive: true
+                });
+            });
+        </script>
 
     </body>
 </html>

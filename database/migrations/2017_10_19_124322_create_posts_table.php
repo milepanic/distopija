@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->integer('upvotes')->default(0);
             $table->integer('downvotes')->default(0);
             $table->integer('favorites')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

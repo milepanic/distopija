@@ -4,11 +4,12 @@
 ADMIN PANEL:
    ✔ Middleware @done (17-10-24 12:48)
   Dashboard:
-   ☐ Registered useres
-   ☐ Number of posts
-   ☐ -||-   of original posts
+   ✔ Registered useres @done (17-10-26 01:01)
+   ✔ Number of posts @done (17-10-26 01:01)
+   ✔ -||-   of original posts @done (17-10-26 01:01)
    ☐ Activity graph
    ☐ Social network likes
+   ☐ Morris charts
    ...
   Users:
    ☐ Last active
@@ -17,10 +18,11 @@ ADMIN PANEL:
    ☐ Ban info
    ☐ Send message
   Posts:
-   ☐ Delete
+   ✔ Delete @done (17-10-25 17:18)
    ☐ Edit every field
+   ☐ Delete soft deletes every 3 days
   Categories:
-   ☐ Approve/Reject
+   ✔ Approve/Reject @done (17-10-25 17:31)
    ☐ Edit every field
 
 
@@ -35,5 +37,6 @@ LOGIC:
 OTHER:
  ☐ Datatables
  ☐ Comments
+ ✔ Seeder @done (17-10-25 22:49)
 
 
