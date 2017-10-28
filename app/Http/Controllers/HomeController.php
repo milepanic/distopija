@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Category;
 use App\Post;
 use App\User;
@@ -26,17 +27,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = Auth::user();
+        return view('pages.welcome', compact('user'));
+    }
+
+    public function profile()
+    {
+        return view('pages.profile');
     }
 
     public function submit()
     {
-        return view('submit');
+        return view('pages.submit');
     }
 
     public function create()
     {
-        return view('create');
+        return view('pages.create');
     }
 
 
@@ -53,7 +60,7 @@ class HomeController extends Controller
 
     public function users()
     {
-        $users = User::count();
+        $users = User::all();
         
         return view('admin.users', compact('users'));;
     }

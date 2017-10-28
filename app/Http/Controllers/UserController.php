@@ -12,7 +12,7 @@ class UserController extends Controller
     {
     	$user = Auth::user()->find($id);
 
-    	$user->banned_until = '2016-11-12';
+    	$user->banned_until = '2018-11-12';
     	$user->ban_message = 'Breaking of rules';
 
     	$user->save(); 

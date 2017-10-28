@@ -12,9 +12,10 @@
 */
 
 Route::group(['middleware' => 'banned'], function () {
-	Route::get('/', function () {
-	    return view('welcome');
-	});
+	Route::get('/', 'HomeController@index');
+
+	Route::get('profile', 'HomeController@profile');
+	
 	Route::get('submit', 'HomeController@submit')->name('submit');
 	Route::post('submit', 'PostController@create');
 
