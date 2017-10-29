@@ -22,9 +22,11 @@ Route::group(['middleware' => 'banned'], function () {
 	Route::get('create', 'HomeController@create')->name('create');
 	Route::post('create', 'CategoryController@create');
 
-	Auth::routes();
+	Route::get('delete/{id}', 'PostController@delete');
 
-	Route::get('/home', 'HomeController@index')->name('home');
+	Route::post('comment/{id}', 'CommentController@create');
+
+	Auth::routes();
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {

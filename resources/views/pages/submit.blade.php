@@ -8,7 +8,6 @@
 				<form action="submit" method="POST"
 					class="form-horizontal">
 					{{ CSRF_field() }}
-
 					<div class="form-group">
 						<div class="col-md-4">
 							<textarea name="content" cols="30" rows="10" class="form-control top-buffer" id="content" placeholder="Napisi vic..."></textarea>

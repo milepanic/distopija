@@ -10,10 +10,10 @@ class PostController extends Controller
 {
     public function create(Request $request)
     {
-        //verifikacija
-
+        // verify
+        
     	Post::create([
-    		'content' => request('content') ,
+    		'content' => request('content'),
     		'category' => request('category'),
     		'original' => request('original'),
             'user_id' => Auth::user()->id

@@ -33,6 +33,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+    public function comment()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
     public function isBanned()
     {
         if($this->banned_until && Carbon::now() <= $this->banned_until)

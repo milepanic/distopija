@@ -29,6 +29,15 @@ ADMIN PANEL:
 
 
 FRONT PAGE:
+ ☐ Edit posts
+ ☐ Upvote/Downvote/Favorite
+ ☐ Visit/Block Category
+ ☐ Report post
+ ☐ Share on social media
+ ☐ Edit comment
+ ☐ Delete comment
+ ☐ Reply to comment
+ ☐ Upvote/Downvote comment
 
 LOGIC:
  ☐ Inbox
@@ -36,7 +45,7 @@ LOGIC:
 
 OTHER:
  ✔ Datatables @done (17-10-26 23:16)
- ☐ Comments
+ ✔ Comments @done (17-10-29 22:52)
  ✔ Seeder @done (17-10-25 22:49)
 
 
