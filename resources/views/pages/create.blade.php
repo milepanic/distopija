@@ -26,10 +26,10 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<div class="col-md-4">
-							<div class="col-sm col-md-4">
+						<div class="col-md-6">
+							<div class="col-sm col-md-6">
 						      <div class="checkbox">
-						        <label class="col-md-4">
+						        <label class="col-md-6">
 						          <input type="checkbox" name="cover_box" value="1"> Cover box
 						        </label>
 						      </div>

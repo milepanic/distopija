@@ -38,9 +38,10 @@
                                 	</a>
                                 	<a href="https://laravel.io/forum/03-03-2014-sentry-3-users-online"> Alt</a>
                                 </td>
+                                <!-- Modal -->
                                 <td>
                                 	<a class="text-danger" title="Ban user {{ $user->name }}"
-                                		href="users/ban/{{ $user->id }}">
+                                        data-toggle="modal" data-target="#myModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}">
                                 		<i class="fa fa-ban" aria-hidden="true"></i>
                                 	</a>&nbsp;
                                 	<a class="text-success" title="Unban user {{ $user->name }}"
@@ -58,5 +59,46 @@
             </div>
 	    </div>
 	</div>
+
+     <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title"></h3>
+                </div>
+                <div class="modal-body">
+                    <form class="modal-form" {{-- action="users/ban/{{ $user->id }}" --}}>
+                    {{ CSRF_FIELD() }}
+                    <p>Choose ban date</p>
+                    <input name="date" type="date" class="form-control">
+                    <br>
+                    <p>Write a reason for ban</p>
+                    <input name="reason" type="text" class="form-control" placeholder="Razlog" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger">Banuj</button>
+                    <button class="btn btn-info" data-dismiss="modal">Izadji</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        $('#myModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var name = a.data('name');
+            var id = a.data('id');
+            
+            var modal = $(this);
+            modal.find('.modal-form').action('users/ban/' + id);
+            modal.find('.modal-title').text('You are banning ' + name);
+            modal.find('.modal-body input').val(recipient);
+        });
+    </script>
 
 @endsection

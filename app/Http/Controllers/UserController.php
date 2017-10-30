@@ -8,12 +8,12 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function banUser($id)
+    public function banUser(Request $request, $id)
     {
     	$user = Auth::user()->find($id);
 
-    	$user->banned_until = '2018-11-12';
-    	$user->ban_message = 'Breaking of rules';
+    	$user->banned_until = request('date');
+    	$user->ban_message = request('reason');
 
     	$user->save(); 
 

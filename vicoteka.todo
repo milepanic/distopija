@@ -14,8 +14,9 @@ ADMIN PANEL:
   Users:
    ☐ Last active
    ✔ Ban/Unban user @done (17-10-25 16:26)
-   ☐ Select ban date
-   ☐ Ban info
+   ✔ Select ban date @done (17-10-30 00:16)
+   ✔ Ban info @done (17-10-30 00:16)
+   ☐ Make bootstrap modal for bans 
    ☐ Send message
   Posts:
    ✔ Delete @done (17-10-25 17:18)
@@ -29,6 +30,7 @@ ADMIN PANEL:
 
 
 FRONT PAGE:
+ ☐ Pagination
  ☐ Edit posts
  ☐ Upvote/Downvote/Favorite
  ☐ Visit/Block Category
