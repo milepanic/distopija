@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $posts = Post::latest()->get();
+        $posts = Post::latest()->paginate(10);
         $comments = Comment::all();
         return view('pages.welcome', compact('user', 'posts', 'comments'));
     }
@@ -26,7 +26,8 @@ class HomeController extends Controller
 
     public function submit()
     {
-        return view('pages.submit');
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('pages.submit', compact('categories'));
     }
 
     public function create()

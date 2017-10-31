@@ -22,12 +22,42 @@ class PostController extends Controller
     	return redirect('submit');
     }
 
+    public function view($id)
+    {
+        $post = Post::find($id);
+
+        return view('pages.view', compact('post'));
+    }
+
+    public function edit($id)
+    {
+        $post = Post::find($id);
+
+        return view('pages.edit', compact('post'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $post = Post::find($id);
+
+        $post->content = request('content');
+        if(request('original'))
+            $post->original = 1;
+        else
+            $post->original = null;
+
+        $post->save();
+
+        return redirect('v/' . $post->id);
+        // return view('pages.view', compact('post'));
+    }
+
     public function delete($id)
     {
         $post = Post::find($id);
 
         $post->delete();
 
-        return redirect()->back();
+        return redirect('/');
     }
 }

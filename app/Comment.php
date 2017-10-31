@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-	protected $fillable = ['comment', 'post_id', 'user_id'];
+	protected $fillable = ['comment', 'upvotes', 'downvotes', 'favorites', 'report', 'reply_id', 'post_id', 'user_id'];
 
-	// public function reply_id()
-	// {
-	// 	return $this->hasMany('App\Comment', 'id', 'reply_id');
-	// }
+	public function reply_id()
+	{
+		return $this->hasMany('App\Comment', 'id', 'reply_id');
+	}
 	
     public function post()
     {

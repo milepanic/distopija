@@ -17,8 +17,11 @@
 						<div class="col-md-4">
 							<select name="category" required class="form-control">
 								<option value="" selected disabled hidden class="form-control">Izaberi kategoriju</option>
-								<option value="Kategorija 1" class="form-control">kat 1</option>
-								<option value="Kategorija 2" class="form-control">kat 2</option>
+								@foreach($categories as $category)
+
+									<option value="{{ $category->id }}" class="form-control">{{ $category->name }}</option>
+
+								@endforeach
 							</select>
 						</div>
 					</div>

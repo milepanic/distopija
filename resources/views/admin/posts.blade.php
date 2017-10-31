@@ -29,7 +29,7 @@
                                 <td class="col-md-3">{{ $post->content }}</td>
                                 <td>{{ $post->user->name }}</td>
                                 <td>{{ $post->original }}</td>
-                                <td>{{ $post->category }}</td>
+                                <td>{{ $post->category->name }}</td>
                                 <td> {{ $post->upvotes }} </td>
                                 <td> {{ $post->downvotes }} </td>
                                 <td> {{ $post->favorites }} </td>

@@ -16,12 +16,17 @@ class CreateCommentsTable extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->text('comment');
-            // $table->integer('upvotes')->default(0);
-            // $table->integer('downvotes')->default(0);
-            // $table->integer('reply_id')->default(0);
+            $table->integer('votes')->default(0);
+            $table->integer('reply_id')->default(0);
             $table->integer('post_id');
             $table->integer('user_id');
             $table->timestamps();
+        });
+
+        Schema::create('comment_user_vote', function (Blueprint $table) {
+            $table->integer('comment_id');
+            $table->integer('user_id');
+            $table->string('vote', 11);
         });
     }
 

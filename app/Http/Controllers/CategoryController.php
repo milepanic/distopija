@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -18,6 +19,14 @@ class CategoryController extends Controller
     	]);
 
     	return redirect('create');
+    }
+
+    public function view($name)
+    {
+        $category = Category::where('name', $name)->first();
+        $posts = Post::where('category_id', $category->id)->paginate(10);
+
+        return view('pages.category', compact('category', 'posts'));
     }
 
     public function approve($id)

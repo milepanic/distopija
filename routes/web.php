@@ -12,19 +12,29 @@
 */
 
 Route::group(['middleware' => 'banned'], function () {
-	Route::get('/', 'HomeController@index');
 
+	// PAGES
+	Route::get('/', 'HomeController@index');
 	Route::get('profile', 'HomeController@profile');
 	
+	// POSTS
 	Route::get('submit', 'HomeController@submit')->name('submit');
-	Route::post('submit', 'PostController@create');
+	Route::get('edit/{id}', 'PostController@edit');
 
+	/* Make resource route */
+	Route::post('submit', 'PostController@create');
+	Route::get('v/{id}', 'PostController@view');
+	Route::put('edit/update/{id}', 'PostController@update');
+	Route::delete('delete/{id}', 'PostController@delete');
+
+	// CATEGORIES
 	Route::get('create', 'HomeController@create')->name('create');
 	Route::post('create', 'CategoryController@create');
+	Route::get('k/{name}', 'CategoryController@view');
 
-	Route::get('delete/{id}', 'PostController@delete');
-
+	// COMMENTS
 	Route::post('comment/{id}', 'CommentController@create');
+	Route::post('comment/{id}/{type}', 'CommentController@update');
 
 	Auth::routes();
 });

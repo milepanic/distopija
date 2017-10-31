@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->text('content');
             $table->tinyInteger('original')->nullable();
-            $table->string('category');
+            $table->integer('category_id');
             $table->integer('user_id');
             //comments
             //social-shares

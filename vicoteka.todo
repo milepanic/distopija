@@ -30,8 +30,8 @@ ADMIN PANEL:
 
 
 FRONT PAGE:
- ☐ Pagination
- ☐ Edit posts
+ ✔ Pagination @done (17-10-30 20:16)
+ ✔ Edit posts @done (17-10-30 20:50)
  ☐ Upvote/Downvote/Favorite
  ☐ Visit/Block Category
  ☐ Report post
@@ -49,5 +49,9 @@ OTHER:
  ✔ Datatables @done (17-10-26 23:16)
  ✔ Comments @done (17-10-29 22:52)
  ✔ Seeder @done (17-10-25 22:49)
+ ☐ Social Login
 
+LATER:
+ ☐ Use JavaScript
+ ☐ Use Bulma CSS Framework for design
 
