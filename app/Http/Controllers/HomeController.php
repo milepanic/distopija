@@ -8,14 +8,22 @@ use App\Post;
 use App\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
-        $posts = Post::latest()->paginate(10);
         $comments = Comment::all();
+
+        if(Auth::check()) {
+            $blocked = DB::table('category_user_block')->where('user_id', $user->id)->get()->pluck(['category_id'])->toArray();
+            $posts = Post::whereNotIn('category_id', $blocked)->latest()->paginate(10);
+        } else {
+            $posts = Post::latest()->paginate(10);
+        }
+        
         return view('pages.welcome', compact('user', 'posts', 'comments'));
     }
 

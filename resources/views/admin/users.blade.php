@@ -67,7 +67,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title"></h3>
+                <h3 class="modal-title">You are banning </h3>
                 </div>
                 <div class="modal-body">
                     <form class="modal-form" {{-- action="users/ban/{{ $user->id }}" --}}>
@@ -76,20 +76,21 @@
                     <input name="date" type="date" class="form-control">
                     <br>
                     <p>Write a reason for ban</p>
-                    <input name="reason" type="text" class="form-control" placeholder="Razlog" required>
+                    <input name="reason" type="text" class="form-control" placeholder="Reason" required>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">Banuj</button>
-                    <button class="btn btn-info" data-dismiss="modal">Izadji</button>
+                    <button type="submit" class="btn btn-danger">Ban</button>
+                    <button class="btn btn-info" data-dismiss="modal">Return</button>
                     </form>
                 </div>
             </div>
 
         </div>
     </div>
-
+{{-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> --}}
     <script>
         $('#myModal').on('show.bs.modal', function (event) {
+            alert('dadada');
             var button = $(event.relatedTarget); // Button that triggered the modal
             var name = a.data('name');
             var id = a.data('id');

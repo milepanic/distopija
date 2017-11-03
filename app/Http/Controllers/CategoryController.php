@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\CategoryBlock;
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -27,6 +29,21 @@ class CategoryController extends Controller
         $posts = Post::where('category_id', $category->id)->paginate(10);
 
         return view('pages.category', compact('category', 'posts'));
+    }
+
+    // Blokirane kategorije se nece pojavljivati na pocetnoj strani, ali im se moze pristupiti
+    public function block($id)
+    {
+        //provjeriti da li treba u category_id ubacivati samo $id ili treba dodatna provjera
+        $user = Auth::user();
+        //$category = Category::find($id);
+
+        CategoryBlock::create([
+            'category_id' => $id,
+            'user_id' => $user->id
+        ]);
+
+        return redirect('/');        
     }
 
     public function approve($id)

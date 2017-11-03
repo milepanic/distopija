@@ -147,11 +147,6 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
-        <!-- Morris Charts JavaScript -->
-        <script src="{{ asset('js/raphael.min.js') }}"></script>
-        <script src="{{ asset('js/morris.min.js') }}"></script>
-        <script src="{{ asset('js/morris-data.js') }}"></script>
-
         <!-- Custom Theme JavaScript -->
         <script src="{{ asset('js/startmin.js') }}"></script>
 

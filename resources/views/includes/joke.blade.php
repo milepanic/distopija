@@ -27,7 +27,7 @@
 			<p> Downvote </p>
 			<p> Favorite </p>
 			<p> <a href="{{ url('k/' . $post->category->name) }}">Visit Category</a> </p>
-			<p> Block Category </p>
+			<p> <a href="{{ url('block/' . $post->category->id) }}">Block Category</a> </p>
 			<p> Report </p>
 			<p> Share </p>
 			<hr>

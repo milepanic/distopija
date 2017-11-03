@@ -31,6 +31,7 @@ Route::group(['middleware' => 'banned'], function () {
 	Route::get('create', 'HomeController@create')->name('create');
 	Route::post('create', 'CategoryController@create');
 	Route::get('k/{name}', 'CategoryController@view');
+	Route::get('block/{id}', 'CategoryController@block');
 
 	// COMMENTS
 	Route::post('comment/{id}', 'CommentController@create');

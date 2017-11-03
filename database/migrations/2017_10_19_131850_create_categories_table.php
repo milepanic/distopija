@@ -24,6 +24,11 @@ class CreateCategoriesTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Schema::create('category_user_block', function (Blueprint $table){
+            $table->integer('category_id');
+            $table->integer('user_id');
+        });
     }
 
     /**
