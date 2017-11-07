@@ -7,6 +7,7 @@ use App\Comment;
 use App\Post;
 use App\User;
 use Auth;
+use Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -27,9 +28,52 @@ class HomeController extends Controller
         return view('pages.welcome', compact('user', 'posts', 'comments'));
     }
 
-    public function profile()
+    public function profile($slug)
     {
-        return view('pages.profile');
+        $user = Auth::user()->where('slug', $slug)->first();
+        $posts = $user->posts()->get();
+
+        return view('pages.profile', compact('user', 'posts'));
+    }
+
+    public function edit($slug)
+    {
+        if(Auth::user()->slug !== $slug)
+            abort(403); // postaviti gate
+
+        $user = Auth::user()->where('slug', $slug)->first();
+
+        return view('pages.editUser', compact('user'));
+    }
+
+    public function update($id, Request $request)
+    {
+        if(!Auth::user()->id === $id)
+            abort(403);
+            
+        $user = Auth::user()->find($id);
+
+        $name = request('name');
+        $email = request('email');
+        $description = request('description');
+        $slug = str_slug($name);
+
+        $user->name = $name;
+        $user->email = $email;
+        $user->description = $description;
+        $user->slug = $slug;
+
+        if($request->file('image') !== null)
+        {
+            $image = $request->file('image');
+            $location = public_path('images/users/' . $user->id);
+
+            Image::make($image)->resize(300, 300)->save($location);           
+        }
+
+        $user->save();
+
+        return redirect('profile/' . $user->slug);
     }
 
     public function submit()

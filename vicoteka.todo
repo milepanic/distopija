@@ -1,6 +1,3 @@
-// CTRL + Enter - novi task
-// CTRL + D     - zavrsen task
-
 ADMIN PANEL:
    ✔ Middleware @done (17-10-24 12:48)
   Dashboard:
@@ -43,10 +40,13 @@ FRONT PAGE:
  ☐ View composer for sidebar
 
  PROFILE:
-  ☐ User info
-  ☐ User posts
-  ☐ Upvoted/Downvoted/Favorited posts
-  ☐ Change user info
+  ✔ User info @done (17-11-07 21:09)
+  ✔ User posts @done (17-11-07 21:09)
+  ☐ Original posts
+  ☐ Favorited posts
+  ✔ Change user info @done (17-11-07 20:41)
+  ✔ Profile picture @done (17-11-07 20:41)
+  ☐ JS Cropper
   ☐ See blocked categories
   ☐ User points
   ☐ Medals

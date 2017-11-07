@@ -10,18 +10,18 @@
 					{{ CSRF_field() }}
 					<div class="form-group">
 						<div class="col-md-4">
-							<textarea name="content" cols="30" rows="10" class="form-control top-buffer" id="content" placeholder="Napisi vic..."></textarea>
+							<textarea name="content" cols="30" rows="10" class="form-control top-buffer" id="content" placeholder="Napisi vic..." required></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-md-4">
-							<select name="category" required class="form-control">
-								<option value="" selected disabled hidden class="form-control">Izaberi kategoriju</option>
-								@foreach($categories as $category)
+							<select value="" name="category" required class="form-control">
+								<option selected disabled hidden class="form-control">Izaberi kategoriju</option>
+									@foreach($categories as $category)
 
-									<option value="{{ $category->id }}" class="form-control">{{ $category->name }}</option>
+										<option value="{{ $category->id }}" class="form-control">{{ $category->name }}</option>
 
-								@endforeach
+									@endforeach
 							</select>
 						</div>
 					</div>
@@ -31,7 +31,6 @@
 						      <div class="checkbox">
 						        <label class="col-md-4">
 						          <input type="checkbox" name="original" value="1"> Original
-						          	
 						        </label>
 						      </div>
 						    </div>						
