@@ -38,6 +38,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Comment');
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category')->withPivot('blocked', 'moderator');
+    }
+
     public function isBanned()
     {
         if($this->banned_until && Carbon::now() <= $this->banned_until)

@@ -25,9 +25,13 @@ class CreateCategoriesTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('category_user_block', function (Blueprint $table){
+        Schema::create('category_user', function (Blueprint $table){
             $table->integer('category_id');
             $table->integer('user_id');
+            $table->tinyInteger('blocked')->default(0);
+            $table->tinyInteger('moderator')->default(0);
+
+            //$table->primary(['category_id', 'user_id']);
         });
     }
 

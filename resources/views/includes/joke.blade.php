@@ -6,6 +6,7 @@
 			<p> <strong>Original</strong>: {{ $post->original }} </p>
 			<p> <strong>User</strong>: {{ $post->user->name }} </p>
 			<p> <strong>Category:</strong> {{ $post->category->name }} </p>
+			<p> <strong>Category ID:</strong> {{ $post->category->id }} </p>
 			<p> <strong>Date</strong>: <a href="{{ url('v/' . $post->id) }}">{{ (\Carbon\Carbon::parse($post->created_at)->diffForHumans() ) }}</a> </p>
 			<hr>
 			<p> 

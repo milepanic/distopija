@@ -18,7 +18,7 @@ class HomeController extends Controller
         $comments = Comment::all();
 
         if(Auth::check()) {
-            $blocked = DB::table('category_user_block')->where('user_id', $user->id)->get()->pluck(['category_id'])->toArray();
+            $blocked = $user->categories()->where('blocked', 1)->get()->pluck(['id'])->toArray();
             $posts = Post::whereNotIn('category_id', $blocked)->latest()->paginate(10);
         } else {
             $posts = Post::latest()->paginate(10);
