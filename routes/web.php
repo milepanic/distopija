@@ -39,6 +39,12 @@ Route::group(['middleware' => 'banned'], function () {
 	Route::post('comment/{id}', 'CommentController@create');
 	Route::post('comment/{id}/{type}', 'CommentController@update');
 
+	Route::group(['prefix' => 'inbox'], function() {
+		Route::get('/', 'MessageController@view')->name('inbox');
+		Route::get('compose', 'MessageController@compose');
+		Route::post('new', 'MessageController@new');
+	});
+
 	Auth::routes();
 });
 

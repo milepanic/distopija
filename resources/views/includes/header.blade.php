@@ -23,7 +23,7 @@
 
         @if(Auth::check())
 
-          <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+          <li><a href="{{ url('inbox') }}"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
           <li><a href="#"><i class="fa fa-bell-o" aria-hidden="true"></i></a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} <span class="caret"></span></a>

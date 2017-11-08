@@ -19,7 +19,8 @@
 					poslednja aktivnost
 					zbir glasova
 					komentari
-					@if(Auth::user()->id === $user->id)
+
+					@if(Auth::check() && Auth::user()->id === $user->id)
 						<p><a href="{{ url('profile/edit/' . $user->slug) }}">Promijeni osobine</a></p>
 					@endif
 

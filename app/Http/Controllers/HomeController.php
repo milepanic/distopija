@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function profile($slug)
     {
-        $user = Auth::user()->where('slug', $slug)->first();
+        $user = User::where('slug', $slug)->first();
         $posts = $user->posts()->get();
 
         return view('pages.profile', compact('user', 'posts'));
