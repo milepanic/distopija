@@ -24,13 +24,20 @@
 				@endcannot
 			</p>
 	        <br>
-			<p> Upvote </p>
-			<p> Downvote </p>
-			<p> Favorite </p>
+	        <p> NE RADI </p>
+			{{-- <form action="{{ url('post/' . $post->id . '/') }}" method="POST"> --}}
+				{{-- {{ csrf_field() }} --}}
+				<button class="btn btn-primary vote" data-type="upvote" data-id="{{ $post->id }}">Upvote</button>
+				<button class="btn btn-danger vote" data-type="downvote" data-id="{{ $post->id }}">Downvote</button>
+				<button class="btn btn-success favorite" data-type="favorite" data-id="{{ $post->id }}">Favorite</button>
+			{{-- </form> --}}
+			<p> -------- </p>
 			<p> <a href="{{ url('k/' . $post->category->name) }}">Visit Category</a> </p>
 			<p> <a href="{{ url('block/' . $post->category->id) }}">Block Category</a> </p>
-			<p> Report </p>
+			<p> NE RADI </p>
+			<p> Report // napraviti u admin panelu tabelu u koju se upisuje korisnik, post i razlog </p>
 			<p> Share </p>
+			<p> ------- </p>
 			<hr>
 			<p> <strong>Upvotes</strong>: {{ $post->upvotes }} </p>
 			<p> <strong>Downvotes</strong>: {{ $post->downvotes }} </p>
@@ -81,3 +88,42 @@
 		</div>
 	</div>
 </div>
+
+@section('exteral-js')
+	<script type="text/javascript">
+		$('.vote').click(function() {
+			var vote = {
+				type: $(this).data('type'),
+				id: $(this).data('id')
+			};
+
+			$.ajax({
+				type: 'POST',
+				url: '/post/vote',
+				data: vote,
+				success: function (data) {
+					// $(this).addClass('voted');
+				},
+				error: function() {
+					alert('Dogodila se greska');
+				}
+			});
+		});
+
+		$('.favorite').click(function() {
+			var fav = { id: $(this).data('id') };
+
+			$.ajax({
+				type: 'POST',
+				url: '/post/favorite',
+				data: fav,
+				success: function (data) {
+					alert('Favorited');
+				},
+				error: function() {
+					alert('Dogodila se fav greska');
+				}
+			});
+		});
+	</script>
+@endsection

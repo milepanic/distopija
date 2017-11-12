@@ -22,7 +22,9 @@ Route::group(['middleware' => 'banned'], function () {
 	// POSTS
 	Route::get('submit', 'HomeController@submit')->name('submit');
 	Route::get('edit/{id}', 'PostController@edit');
-
+	// Vote & Favorite
+	Route::post('post/favorite', 'PostController@favorite');
+	Route::post('post/vote', 'PostController@vote');
 	/* Make resource route */
 	Route::post('submit', 'PostController@create');
 	Route::get('v/{id}', 'PostController@view');

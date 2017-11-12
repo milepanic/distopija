@@ -28,6 +28,13 @@ class CreatePostsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        Schema::create('post_user_vote', function (Blueprint $table) {
+            $table->integer('post_id');
+            $table->integer('user_id');
+            $table->tinyInteger('vote')->nullable();
+            $table->tinyInteger('favorite')->nullable();
+        });
     }
 
     /**

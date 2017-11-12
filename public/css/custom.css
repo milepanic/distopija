@@ -1,4 +1,3 @@
-body {
-	/*margin-top: 20px;*/
-	background: red;
+.voted {
+	border: 2px solid black;
 }

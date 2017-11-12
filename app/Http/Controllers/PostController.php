@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\PostVote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,5 +60,35 @@ class PostController extends Controller
         $post->delete();
 
         return redirect('/');
+    }
+
+    public function vote(Request $request)
+    {
+        $type = $request->input('type');
+        $id = $request->input('id');
+        $user = Auth::user()->id;
+
+        if ($type === 'upvote')
+            $data = 1;
+        elseif ($type === 'downvote')
+            $data = 0;
+
+        PostVote::create([
+            'post_id' => $id,
+            'user_id' => $user,
+            'vote' => $data
+        ]);
+    }
+
+    public function favorite(Request $request)
+    {
+        $id = $request->input('id');
+        $user = Auth::user()->id;
+
+        PostVote::create([
+            'post_id' => $id,
+            'user_id' => $user,
+            'favorite' => 1
+        ]);
     }
 }
