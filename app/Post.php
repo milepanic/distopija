@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -27,4 +28,15 @@ class Post extends Model
     {
         return $this->hasMany('App\Comment');
     }
+
+    public function favorites()
+    {
+        return $this->belongsToMany('App\User', 'favorites');
+    }
+
+    public function favoritedBy(User $user)
+    {
+        return $this->favorites()->where('user_id', $user->id)->exists();
+    }
+
 }

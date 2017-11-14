@@ -33,9 +33,13 @@ class CreatePostsTable extends Migration
             $table->integer('post_id');
             $table->integer('user_id');
             $table->tinyInteger('vote')->nullable();
-            // $table->tinyInteger('favorite')->nullable();
             $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::create('favorites', function (Blueprint $table) {
+            $table->integer('post_id');
+            $table->integer('user_id');
         });
     }
 

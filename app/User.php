@@ -10,20 +10,10 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name', 'email', 'password', 'slug'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
@@ -54,5 +44,10 @@ class User extends Authenticatable
             return true;
         else
             return false;
+    }
+
+    public function favoritePosts()
+    {
+        return $this->belongsToMany('App\Post', 'favorites');
     }
 }

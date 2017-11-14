@@ -7,6 +7,7 @@ use App\Post;
 use App\PostVote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -85,12 +86,9 @@ class PostController extends Controller
     public function favorite(Request $request)
     {
         $id = $request->input('id');
-        $user = Auth::user()->id;
 
-        PostVote::create([
-            'post_id' => $id,
-            'user_id' => $user,
-            'favorite' => 1
-        ]);
+        $request->user()->favoritePosts()->toggle($id);
+
+        return response()->json('Succes!');
     }
 }

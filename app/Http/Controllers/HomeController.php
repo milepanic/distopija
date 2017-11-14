@@ -15,6 +15,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        // $request->user()
         $user = Auth::user();
 
         if(Auth::check()) {
@@ -31,7 +32,9 @@ class HomeController extends Controller
     public function profile($slug)
     {
         $user = User::where('slug', $slug)->first();
-        $posts = $user->posts()->get();
+        // $posts = $user->posts()->get();
+        $posts = $user->favoritePosts()->get();
+        // withCount()
 
         return view('pages.profile', compact('user', 'posts'));
     }

@@ -11,24 +11,29 @@
 			<hr>
 			<p> 
 				@can('update', $post)
-					<a href="{{ url('edit/' . $post->id) }}">Edit</a><br>
+					<a href="{{ url('edit/' . $post->id) }}" class="btn btn-info">Edit</a><br>
 					<form action="{{ url('delete/' . $post->id) }}" method="POST">
 						{{ csrf_field() }}
 						{{ method_field('DELETE') }}
-						<button type="submit">Delete</button>
+						<button class="btn btn-danger" type="submit">Delete</button>
 					</form>
 				@endcan
 
 				@cannot('update', $post)
 					Can not Edit 
 				@endcannot
+				<br>
+			<button class="btn favorite 
+						@if($post->favoritedBy($user)) voted @endif" 
+						data-id="{{ $post->id }}">Favorite
+			</button>
 			</p>
 	        <br>
 	        <p> NE RADI </p>
 			<button class="btn btn-primary vote" data-type="upvote" data-id="{{ $post->id }}">Upvote</button>
 			<button class="btn btn-danger vote" data-type="downvote" data-id="{{ $post->id }}">Downvote</button>
-			<button class="btn favorite" data-type="favorite" data-id="{{ $post->id }}">Favorite</button>
 			<p> -------- </p>
+
 			<p> <a href="{{ url('k/' . $post->category->name) }}">Visit Category</a> </p>
 			<p> <a href="{{ url('block/' . $post->category->id) }}">Block Category</a> </p>
 			<p> NE RADI </p>
@@ -101,6 +106,26 @@
 				data: vote,
 				success: function (data) {
 					// $(this).addClass('voted');
+				},
+				error: function() {
+					alert('Dogodila se greska');
+				}
+			});
+		});
+
+		$('.favorite').click(function() {
+			var vote = {
+				id: $(this).data('id')
+			};
+
+			$(this).toggleClass('voted');
+
+			$.ajax({
+				type: 'POST',
+				url: '/post/favorite',
+				data: vote,
+				success: function (data) {
+					
 				},
 				error: function() {
 					alert('Dogodila se greska');

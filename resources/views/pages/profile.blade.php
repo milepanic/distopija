@@ -32,7 +32,7 @@
 						<li><a href="#">Omiljeni vicevi (000)</a></li>
 					</ul>
 
-					@foreach($user->posts as $post)
+					@foreach($posts as $post)
 						
 						@include('includes.joke')
 

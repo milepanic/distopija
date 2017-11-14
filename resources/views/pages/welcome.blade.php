@@ -5,9 +5,8 @@
 	<div class="container">
 		<div class="row">
 			<ul class="nav nav-tabs">
-				<li><a href="#">NE RADI ---></a></li>
-				<li class="active"><a href="#">Hot</a></li>
-				<li><a href="#">New</a></li>
+				<li><a href="#">Hot</a></li>
+				<li class="active"><a href="#">New</a></li>
 				<li><a href="#">Top</a></li>
 				<li><a href="#">Original</a></li>
 			</ul><br>
