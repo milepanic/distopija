@@ -33,7 +33,9 @@ class CreatePostsTable extends Migration
             $table->integer('post_id');
             $table->integer('user_id');
             $table->tinyInteger('vote')->nullable();
-            $table->tinyInteger('favorite')->nullable();
+            // $table->tinyInteger('favorite')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

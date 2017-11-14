@@ -60,6 +60,8 @@ OTHER:
  ✔ Comments @done (17-10-29 22:52)
  ✔ Seeder @done (17-10-25 22:49)
  ☐ Social Login
+ ☐ Eager loading - comments
+ ☐ Cache queries on welcome page
 
 LATER:
  ☐ Use JavaScript

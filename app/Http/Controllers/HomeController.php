@@ -16,16 +16,16 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $comments = Comment::all();
 
         if(Auth::check()) {
+            // Gets all posts which category the user did not block
+            // Gets 'id' of where blocked = 1 from pivot table and shows posts which category does not have that 'id'
             $blocked = $user->categories()->where('blocked', 1)->get()->pluck(['id'])->toArray();
-            $posts = Post::whereNotIn('category_id', $blocked)->latest()->paginate(10);
+            $posts = Post::whereNotIn('category_id', $blocked)->with('comments.user', 'user', 'category')->latest()->paginate(10);
         } else {
-            $posts = Post::latest()->paginate(10);
-        }
-        
-        return view('pages.welcome', compact('user', 'posts', 'comments'));
+            $posts = Post::with('user', 'category')->latest()->paginate(10);
+        }        
+        return view('pages.welcome', compact('user', 'posts', 'comments.user'));
     }
 
     public function profile($slug)

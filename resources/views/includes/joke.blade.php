@@ -25,12 +25,9 @@
 			</p>
 	        <br>
 	        <p> NE RADI </p>
-			{{-- <form action="{{ url('post/' . $post->id . '/') }}" method="POST"> --}}
-				{{-- {{ csrf_field() }} --}}
-				<button class="btn btn-primary vote" data-type="upvote" data-id="{{ $post->id }}">Upvote</button>
-				<button class="btn btn-danger vote" data-type="downvote" data-id="{{ $post->id }}">Downvote</button>
-				<button class="btn btn-success favorite" data-type="favorite" data-id="{{ $post->id }}">Favorite</button>
-			{{-- </form> --}}
+			<button class="btn btn-primary vote" data-type="upvote" data-id="{{ $post->id }}">Upvote</button>
+			<button class="btn btn-danger vote" data-type="downvote" data-id="{{ $post->id }}">Downvote</button>
+			<button class="btn favorite" data-type="favorite" data-id="{{ $post->id }}">Favorite</button>
 			<p> -------- </p>
 			<p> <a href="{{ url('k/' . $post->category->name) }}">Visit Category</a> </p>
 			<p> <a href="{{ url('block/' . $post->category->id) }}">Block Category</a> </p>
@@ -57,9 +54,10 @@
 	        </form>
 
 	        <p> Edit </p><br>
-
+	
+			{{-- EAGER LOAD THIS --}}
 	        @forelse($post->comments as $comment)
-
+				
 	        	<p> Komentar: {{ $comment->comment }} </p>
 	        	<p> ID: {{ $comment->id }} </p>
 	        	<p> Votes: {{ $comment->votes }} </p>
@@ -106,22 +104,6 @@
 				},
 				error: function() {
 					alert('Dogodila se greska');
-				}
-			});
-		});
-
-		$('.favorite').click(function() {
-			var fav = { id: $(this).data('id') };
-
-			$.ajax({
-				type: 'POST',
-				url: '/post/favorite',
-				data: fav,
-				success: function (data) {
-					alert('Favorited');
-				},
-				error: function() {
-					alert('Dogodila se fav greska');
 				}
 			});
 		});

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
 use App\PostVote;
 use Illuminate\Http\Request;
@@ -25,9 +26,10 @@ class PostController extends Controller
 
     public function view($id)
     {
-        $post = Post::find($id);
+        $post = Post::with('category', 'user')->find($id);
+        $comments = Comment::with('user')->where('post_id', $post->id)->get();
 
-        return view('pages.view', compact('post'));
+        return view('pages.view', compact('post', 'comments'));
     }
 
     public function edit($id)
