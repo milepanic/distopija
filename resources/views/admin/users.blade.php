@@ -42,7 +42,7 @@
                                 <td>
                                 	<a class="text-danger" title="Ban user {{ $user->name }}"
                                         data-toggle="modal" data-target="#myModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}">
-                                		<i class="fa fa-ban" aria-hidden="true"></i>
+                                		Ne radi <i class="fa fa-ban" aria-hidden="true"></i>
                                 	</a>&nbsp;
                                 	<a class="text-success" title="Unban user {{ $user->name }}"
                                 		href="users/unban/{{ $user->id }}">
@@ -70,7 +70,7 @@
                 <h3 class="modal-title">You are banning </h3>
                 </div>
                 <div class="modal-body">
-                    <form class="modal-form" {{-- action="users/ban/{{ $user->id }}" --}}>
+                    <form class="modal-form" {{-- action="{{ url('users/ban/' . $user->id) }}" --}}>
                     {{ CSRF_FIELD() }}
                     <p>Choose ban date</p>
                     <input name="date" type="date" class="form-control">
@@ -87,11 +87,10 @@
 
         </div>
     </div>
-{{-- <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script> --}}
+
     <script>
-        $('#myModal').on('show.bs.modal', function (event) {
-            alert('dadada');
-            var button = $(event.relatedTarget); // Button that triggered the modal
+        $('#myModal').click(function (event) {
+            alert('rarr');
             var name = a.data('name');
             var id = a.data('id');
             

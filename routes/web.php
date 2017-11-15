@@ -7,6 +7,7 @@ Route::group(['middleware' => 'banned'], function () {
 	Route::get('profile/{name}', 'HomeController@profile');
 	Route::get('profile/edit/{name}', 'HomeController@edit');
 	Route::put('profile/edit/{id}', 'HomeController@update');
+	Route::get('profile/{name}/blocked', 'HomeController@blocked');
 	
 	// POSTS
 	Route::get('submit', 'HomeController@submit')->name('submit');
@@ -25,6 +26,7 @@ Route::group(['middleware' => 'banned'], function () {
 	Route::post('create', 'CategoryController@create');
 	Route::get('k/{name}', 'CategoryController@view');
 	Route::get('block/{id}', 'CategoryController@block');
+	Route::get('unblock/{id}', 'CategoryController@unblock');
 
 	// COMMENTS
 	Route::post('comment/{id}', 'CommentController@create');
@@ -40,19 +42,21 @@ Route::group(['middleware' => 'banned'], function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
-	Route::get('/', 'HomeController@dashboard')->name('Dashboard');
+	Route::get('/', 'AdminController@dashboard')->name('Dashboard');
 	
-	Route::get('users', 'HomeController@users')->name('Users');
+	Route::get('users', 'AdminController@users')->name('Users');
 	Route::get('users/ban/{id}', 'UserController@banUser');
 	Route::get('users/unban/{id}', 'UserController@unbanUser');
 
-	Route::get('posts', 'HomeController@posts')->name('Posts');
+	Route::get('posts', 'AdminController@posts')->name('Posts');
 	Route::get('posts/delete/{id}', 'PostController@delete');
 
-	Route::get('categories', 'HomeController@categories')->name('Categories');
+	Route::get('categories', 'AdminController@categories')->name('Categories');
 	Route::get('categories/approve/{id}', 'CategoryController@approve');
 	Route::get('categories/reject/{id}', 'CategoryController@reject');
 	Route::get('categories/delete/{id}', 'CategoryController@delete');
 
-	Route::get('medals', 'HomeController@medals')->name('Medals');
+	Route::get('medals', 'AdminController@medals')->name('Medals');
+
+	Route::get('reports', 'AdminController@reports')->name('Reports');
 });

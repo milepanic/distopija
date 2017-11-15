@@ -109,6 +109,11 @@
                                     <i class="fa fa-circle-o-notch fa-fw"></i> Medals
                                 </a>
                             </li>
+                            <li>
+                                <a href="{{ url('admin/reports') }}" class="{{ Request::is('admin/reports') ? 'active' : '' }}">
+                                    <i class="fa fa-flag fa-fw"></i> Reports
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </div>

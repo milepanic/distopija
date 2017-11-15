@@ -22,6 +22,7 @@
 
 					@if(Auth::check() && Auth::user()->id === $user->id)
 						<p><a href="{{ url('profile/edit/' . $user->slug) }}">Promijeni osobine</a></p>
+						<p><a href="{{ url('profile/' . $user->slug . '/blocked') }}">Blocked categories</a></p>
 					@endif
 
 				</div>

@@ -40,6 +40,16 @@ class CategoryController extends Controller
 
         return redirect('/');        
     }
+    // NAPRAVITI TOGGLE UMJESTO ATTACH DETACH
+    public function unblock($id)
+    {
+        $user = Auth::user();
+        $category = Category::find($id);
+
+        $category->users()->detach($user->id, ['blocked' => 0]);
+
+        return back();        
+    }
 
     public function approve($id)
     {

@@ -24,7 +24,7 @@
 				@endcannot
 				<br>
 			<button class="btn favorite 
-						@if($post->favoritedBy($user)) voted @endif" 
+						@if($user && $post->favoritedBy($user)) voted @endif" 
 						data-id="{{ $post->id }}">Favorite
 			</button>
 			</p>
