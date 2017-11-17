@@ -69,18 +69,45 @@ class PostController extends Controller
     {
         $type = $request->input('type');
         $id = $request->input('id');
-        $user = Auth::user()->id;
+        $post = Post::find($id);
 
         if ($type === 'upvote')
-            $data = 1;
+            $vote = 1;
         elseif ($type === 'downvote')
-            $data = 0;
+            $vote = -1;
 
-        PostVote::create([
-            'post_id' => $id,
-            'user_id' => $user,
-            'vote' => $data
-        ]);
+        // ako korisnik nije glasao - upisi u tabelu
+        if (!$post->votedBy($request->user())->count() > 0) {
+            $request->user()->postVote()->attach($id, ['vote' => $vote]);
+            if ($vote === 1)
+                $post->increment('upvotes');
+            else
+                $post->increment('downvotes');
+            return response()->json('Vas glas je upisan');
+        }
+
+        // ako korisnik zeli da obrise svoj vote (vote === $vote) - obrisi red iz tabele
+        if ($post->votedBy($request->user())->first() === $vote) {
+            $request->user()->postVote()->detach($id);
+            if ($vote === 1)
+                $post->decrement('upvotes');
+            else
+                $post->decrement('downvotes');
+        }
+        // ako korisnik promijeni vote (vote !== $vote) - update-uj vote
+        elseif ($post->votedBy($request->user())->first() !== $vote) {
+            $request->user()->postVote()->updateExistingPivot($id, ['vote' => $vote]);
+            if ($vote === 1) {
+                $post->decrement('downvotes');
+                $post->increment('upvotes');
+            }
+            else {
+                $post->decrement('upvotes');
+                $post->increment('downvotes');
+            }
+        }
+
+        return response()->json('Vas glas je promijenjen');
     }
 
     public function favorite(Request $request)
@@ -89,6 +116,8 @@ class PostController extends Controller
 
         $request->user()->favoritePosts()->toggle($id);
 
-        return response()->json('Succes!');
+        // dodati +1 ili *1 u post->favorites
+
+        return response()->json('Success!');
     }
 }

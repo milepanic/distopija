@@ -1,6 +1,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 bg-warning">
+			{{ $post->votedBy($user) }}
+			@if($user && $post->votedBy($user)->count() > 0) Glasao @endif
+			
 			<p> <strong>Joke</strong>: {{ $post->content }} </p>
 			<p> <strong>ID</strong>: {{ $post->id }} </p>
 			<p> <strong>Original</strong>: {{ $post->original }} </p>
@@ -29,10 +32,15 @@
 			</button>
 			</p>
 	        <br>
-	        <p> NE RADI </p>
-			<button class="btn btn-primary vote" data-type="upvote" data-id="{{ $post->id }}">Upvote</button>
-			<button class="btn btn-danger vote" data-type="downvote" data-id="{{ $post->id }}">Downvote</button>
-			<p> -------- </p>
+			<button id="upvote" data-type="upvote" data-id="{{ $post->id }}"
+					class="btn vote @if($user && $post->votedBy($user)->first() === 1) btn-primary @endif">
+				Upvote
+			</button>
+			<button id="downvote" data-type="downvote" data-id="{{ $post->id }}"
+					class="btn vote @if($user && $post->votedBy($user)->first() === -1) btn-danger @endif">
+				Downvote
+			</button>
+			<br><p></p>
 
 			<p> <a href="{{ url('k/' . $post->category->name) }}">Visit Category</a> </p>
 			<p> <a href="{{ url('block/' . $post->category->id) }}">Block Category</a> </p>
@@ -100,12 +108,23 @@
 				id: $(this).data('id')
 			};
 
+			if($(this).data('type') === 'upvote') {
+				if($('#downvote').hasClass('btn-danger'))
+					$('#downvote').removeClass('btn-danger');
+				$(this).toggleClass('btn-primary');
+			}
+			else {
+				if($('#upvote').hasClass('btn-primary'))
+					$('#upvote').removeClass('btn-primary');
+				$(this).toggleClass('btn-danger');
+			}
+
 			$.ajax({
 				type: 'POST',
 				url: '/post/vote',
 				data: vote,
 				success: function (data) {
-					// $(this).addClass('voted');
+					
 				},
 				error: function() {
 					alert('Dogodila se greska');

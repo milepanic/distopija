@@ -39,4 +39,13 @@ class Post extends Model
         return $this->favorites()->where('user_id', $user->id)->exists();
     }
 
+    public function votes()
+    {
+        return $this->belongsToMany('App\User', 'votes')->with('vote');
+    }
+    // NIJE DOBRA VEZA, NE PREPOZNAJE SVOJ MODEL U PIVOT TABELI
+    public function votedBy(User $user)
+    {
+        return $this->votes()->where('user_id', $user->id)->pluck('vote');
+    }
 }

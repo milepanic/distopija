@@ -50,4 +50,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Post', 'favorites');
     }
+
+    public function postVote()
+    {
+        return $this->belongsToMany('App\Post', 'votes')->with('vote');
+    }
 }

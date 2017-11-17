@@ -17,7 +17,7 @@ class HomeController extends Controller
     {
         // $request->user()
         $user = Auth::user();
-
+        
         if(Auth::check()) {
             // Gets all posts which category the user did not block
             // Gets 'id' of where blocked = 1 from pivot table and shows posts which category does not have that 'id'
@@ -25,13 +25,15 @@ class HomeController extends Controller
             $posts = Post::whereNotIn('category_id', $blocked)->with('comments.user', 'user', 'category')->latest()->paginate(10);
         } else {
             $posts = Post::with('user', 'category')->latest()->paginate(10);
-        }        
+        }
+
         return view('pages.welcome', compact('user', 'posts', 'comments.user'));
     }
 
     public function profile($slug)
     {
         $user = User::where('slug', $slug)->first();
+        
         // $posts = $user->posts()->get();
         $posts = $user->favoritePosts()->get();
         // withCount()

@@ -20,6 +20,7 @@ class CreateCategoriesTable extends Migration
             $table->tinyInteger('cover_box')->nullable(); //box koji prekriva punchline
             $table->tinyInteger('pictures')->nullable();
             $table->tinyInteger('videos')->nullable();
+            // da li korisnici mogu postavljati viceve ili samo admini
             $table->tinyInteger('approved')->default(0);
             $table->softDeletes();
             $table->timestamps();
