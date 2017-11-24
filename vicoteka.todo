@@ -64,6 +64,7 @@ OTHER:
  ☐ Social Login
  ☐ Eager loading - comments
  ☐ Cache queries on welcome page
+ ☐ Validation
 
 LATER:
  ☐ Use JavaScript

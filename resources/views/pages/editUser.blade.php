@@ -37,8 +37,77 @@
 						</div>
 					</div>
 				</form>
+
+<div class="row">
+	<div class="col-md-6">
+	<img id="image" src="{{ asset('images/users/' . $user->id . '.png') }}" alt="">
+</div>
+</div>
+<div class="row">
+<button onclick="crop()">Crop</button>
+</div>
+
+
+
 			</div> 
 		</div>
 	</div>
+
+@endsection
+
+@section('external-js')
+
+<script>
+
+	$(function() {
+		// Cropper options
+		var options = {
+			aspectRatio: 1 / 1,
+			minContainerWidth: 350,
+			minContainerHeight: 350,
+			minCropBoxWidth: 300,
+			minCropBoxHeight: 300,
+			minCanvasWidth: 300,
+			minCanvasHeight: 300,
+			cropBoxResizable: true,
+			viewMode: 1,
+			responsive: true,
+			background: false
+		};
+
+		// Show cropper on existing image
+		var image = $("#image");
+		var cropper = image.cropper(options);
+	});
+
+	// Send cropped image to server
+	function crop() {
+		$("#image").cropper('getCroppedCanvas').toBlob(function (blob) {
+			var formData = new FormData();
+
+			formData.append('croppedImage', blob);
+
+			$.ajax('/profile/edit/cropper', {
+				method: "POST",
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function () {
+					alert('Upload success');
+				},
+				error: function () {
+					alert('Upload error');
+				}
+			});
+		});
+	}
+
+</script>
+
+<style>
+	.cropper-crop {
+		display: none;
+	}
+</style>
 
 @endsection

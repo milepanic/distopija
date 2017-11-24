@@ -9,7 +9,7 @@
 				
 
 				<div class="col-md-4">
-					<img src="{{ asset('images/users/' . $user->id) }}" alt="">
+					<img src="{{ asset('images/users/' . $user->id . '.png') }}" alt="">
 					<p>Ime: {{ $user->name }}</p>
 					<p>Opis: {{ $user->description }}</p>
 					<p>Bodovi: {{ $user->points }}</p>

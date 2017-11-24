@@ -1,9 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 bg-warning">
-			{{ $post->votedBy($user) }}
-			@if($user && $post->votedBy($user)->count() > 0) Glasao @endif
-			
+		<div class="col-md-6 bg-warning">			
 			<p> <strong>Joke</strong>: {{ $post->content }} </p>
 			<p> <strong>ID</strong>: {{ $post->id }} </p>
 			<p> <strong>Original</strong>: {{ $post->original }} </p>

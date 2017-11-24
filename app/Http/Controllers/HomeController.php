@@ -15,14 +15,21 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // $request->user()
         $user = Auth::user();
         
         if(Auth::check()) {
             // Gets all posts which category the user did not block
             // Gets 'id' of where blocked = 1 from pivot table and shows posts which category does not have that 'id'
-            $blocked = $user->categories()->where('blocked', 1)->get()->pluck(['id'])->toArray();
-            $posts = Post::whereNotIn('category_id', $blocked)->with('comments.user', 'user', 'category')->latest()->paginate(10);
+            $blocked = $user->categories()
+                            ->where('blocked', 1)
+                            ->get()
+                            ->pluck(['id'])
+                            ->toArray();
+
+            $posts = Post::whereNotIn('category_id', $blocked)
+                            ->with('comments.user', 'user', 'category')
+                            ->latest()
+                            ->paginate(10);
         } else {
             $posts = Post::with('user', 'category')->latest()->paginate(10);
         }
@@ -73,12 +80,24 @@ class HomeController extends Controller
             $image = $request->file('image');
             $location = public_path('images/users/' . $user->id);
 
-            Image::make($image)->resize(300, 300)->save($location);           
+            Image::make($image)->resize(300, 300)->encode('png')->save($location);           
         }
 
         $user->save();
 
         return redirect('profile/' . $user->slug);
+    }
+
+    public function cropper(Request $request)
+    {
+        $image = request('croppedImage');
+        $extension = $image->getClientOriginalExtension();
+        $user = $request->user();
+        $location = public_path('images/users/' . $user->id . '.png');
+
+        Image::make($image)->resize(300, 300)->encode('png')->save($location);
+
+        return response()->json('Operacija uspjesna!');
     }
 
     public function blocked($slug)

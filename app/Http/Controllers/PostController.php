@@ -76,7 +76,7 @@ class PostController extends Controller
         elseif ($type === 'downvote')
             $vote = -1;
 
-        // ako korisnik nije glasao - upisi u tabelu
+        // ako korisnik nije glasao - upisi $vote u tabelu
         if (!$post->votedBy($request->user())->count() > 0) {
             $request->user()->postVote()->attach($id, ['vote' => $vote]);
             if ($vote === 1)
@@ -86,7 +86,7 @@ class PostController extends Controller
             return response()->json('Vas glas je upisan');
         }
 
-        // ako korisnik zeli da obrise svoj vote (vote === $vote) - obrisi red iz tabele
+        // ako korisnik zeli da ponisti svoj vote (vote === $vote) - obrisi red iz tabele
         if ($post->votedBy($request->user())->first() === $vote) {
             $request->user()->postVote()->detach($id);
             if ($vote === 1)
