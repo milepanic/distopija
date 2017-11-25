@@ -13,42 +13,47 @@
 
 					<div class="form-group">
 						<div class="col-md-4">
-							<input type="file" name="image" class="form-control">
+
+							<button id="btn-picture" class="col-md-12 btn bg-faded">Promeni profilnu sliku</button>
+
+							<div id="input-picture" class="hidden">
+								<label>Postavite sliku</label>
+								<input type="file" name="image" id="profile-img" class="form-control" accept="image/*">
+								<br>
+								<div class="row">
+									<div class="col-md-6 img-container">
+										<img id="image" class="display" 
+											{{--src=" asset('images/users/' . $user->id . '.png') --}}">
+									</div>
+								</div>
+							</div>
+							
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-md-4">
+							<label>Korisnicko ime</label>
 							<input type="text" name="name" class="form-control" value="{{ $user->name }}">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-md-4">
+							<label>Email adresa</label>
 							<input type="text" name="email" class="form-control" value="{{ $user->email }}">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-md-4">
+							<label>Opis</label>
 							<textarea name="description" cols="30" rows="10" class="form-control">{{ $user->description }}</textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-md-4">
-							<button type="submit" class="btn col-md-12 btn-primary">Izmeni</button>
+							<button type="submit" onclick="crop()" class="btn col-md-12 btn-primary">Azuriraj</button>
 						</div>
 					</div>
 				</form>
-
-<div class="row">
-	<div class="col-md-6">
-	<img id="image" src="{{ asset('images/users/' . $user->id . '.png') }}" alt="">
-</div>
-</div>
-<div class="row">
-<button onclick="crop()">Crop</button>
-</div>
-
-
-
 			</div> 
 		</div>
 	</div>
@@ -56,29 +61,52 @@
 @endsection
 
 @section('external-js')
-
 <script>
 
-	$(function() {
-		// Cropper options
-		var options = {
-			aspectRatio: 1 / 1,
-			minContainerWidth: 350,
-			minContainerHeight: 350,
-			minCropBoxWidth: 300,
-			minCropBoxHeight: 300,
-			minCanvasWidth: 300,
-			minCanvasHeight: 300,
-			cropBoxResizable: true,
-			viewMode: 1,
-			responsive: true,
-			background: false
-		};
-
-		// Show cropper on existing image
-		var image = $("#image");
-		var cropper = image.cropper(options);
+	// Add file input field
+	$("#btn-picture").click(function (event) {
+		event.preventDefault();
+		$(this).addClass('hidden');
+		$("#input-picture").removeClass('hidden');
 	});
+
+	$(function () {
+		var image = $("#image");
+		var input = $("#profile-img");
+
+		// Display image before upload
+		$("input:file").change(function() {
+			if ($(this).val() != '') 
+			{
+				image.cropper('destroy');
+
+				var reader = new FileReader();
+				reader.readAsDataURL(this.files[0]);
+				reader.onload = function (e) {
+
+					$("#image").width("100%");
+					image.attr('src', this.result);
+
+					// Cropper options
+					var options = {
+						aspectRatio: 1 / 1,
+						minContainerWidth: 350,
+						minContainerHeight: 350,
+						minCropBoxWidth: 100,
+						minCropBoxHeight: 100,
+						minCanvasWidth: 300,
+						minCanvasHeight: 300,
+						cropBoxResizable: true,
+						viewMode: 2,
+						responsive: true,
+						strict: false,
+						preview: '.ac-preview'
+					};
+					image.cropper(options);
+				}
+			}
+		});
+	}); 
 
 	// Send cropped image to server
 	function crop() {
@@ -93,21 +121,14 @@
 				processData: false,
 				contentType: false,
 				success: function () {
-					alert('Upload success');
+					console.log('Upload success');
 				},
 				error: function () {
-					alert('Upload error');
+					console.log('Upload error');
 				}
 			});
 		});
 	}
 
 </script>
-
-<style>
-	.cropper-crop {
-		display: none;
-	}
-</style>
-
 @endsection

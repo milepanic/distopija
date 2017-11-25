@@ -1,3 +1,7 @@
 .voted {
 	border: 2px solid black;
 }
+
+.img-container > img {
+  max-width: 100%;
+}

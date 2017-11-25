@@ -78,7 +78,7 @@ class HomeController extends Controller
         if($request->file('image') !== null)
         {
             $image = $request->file('image');
-            $location = public_path('images/users/' . $user->id);
+            $location = public_path('images/users/' . $user->id . '.png');
 
             Image::make($image)->resize(300, 300)->encode('png')->save($location);           
         }

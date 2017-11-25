@@ -28,9 +28,10 @@ class PostController extends Controller
     public function view($id)
     {
         $post = Post::with('category', 'user')->find($id);
+        $user = Auth::user();
         $comments = Comment::with('user')->where('post_id', $post->id)->get();
 
-        return view('pages.view', compact('post', 'comments'));
+        return view('pages.view', compact('post', 'user', 'comments'));
     }
 
     public function edit($id)
