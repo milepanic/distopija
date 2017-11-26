@@ -20,11 +20,7 @@ class CreatePostsTable extends Migration
             $table->tinyInteger('original')->nullable();
             $table->integer('category_id');
             $table->integer('user_id');
-            //comments
             //social-shares
-            $table->integer('upvotes')->default(0);
-            $table->integer('downvotes')->default(0);
-            $table->integer('favorites')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -27,7 +27,7 @@ class HomeController extends Controller
                             ->toArray();
 
             $posts = Post::whereNotIn('category_id', $blocked)
-                            ->with('comments.user', 'user', 'category')
+                            ->with(['comments.user', 'user', 'category'])
                             ->latest()
                             ->paginate(10);
         } else {
@@ -39,13 +39,13 @@ class HomeController extends Controller
 
     public function profile($slug)
     {
-        $user = User::where('slug', $slug)->first();
-        
-        // $posts = $user->posts()->get();
-        $posts = $user->favoritePosts()->get();
-        // withCount()
+        // $user = User::where('slug', $slug)->withCount('posts')->first();
+        $user = User::where('slug', $slug)
+                            ->with('posts')
+                            ->withCount('posts')
+                            ->first();
 
-        return view('pages.profile', compact('user', 'posts'));
+        return view('pages.profile', compact('user', 'posts', 'origc'));
     }
 
     public function edit($slug)
@@ -65,23 +65,15 @@ class HomeController extends Controller
             
         $user = Auth::user()->find($id);
 
-        $name = request('name');
-        $email = request('email');
-        $description = request('description');
+        $name = $request->name;
+        $email = $request->email;
+        $description = $request->description;
         $slug = str_slug($name);
 
         $user->name = $name;
         $user->email = $email;
         $user->description = $description;
         $user->slug = $slug;
-
-        if($request->file('image') !== null)
-        {
-            $image = $request->file('image');
-            $location = public_path('images/users/' . $user->id . '.png');
-
-            Image::make($image)->resize(300, 300)->encode('png')->save($location);           
-        }
 
         $user->save();
 
@@ -90,8 +82,7 @@ class HomeController extends Controller
 
     public function cropper(Request $request)
     {
-        $image = request('croppedImage');
-        $extension = $image->getClientOriginalExtension();
+        $image = $request->croppedImage;
         $user = $request->user();
         $location = public_path('images/users/' . $user->id . '.png');
 

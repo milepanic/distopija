@@ -21,22 +21,17 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = User::all();
-        
-        return view('admin.users', compact('users'));;
+        return view('admin.users')->withUsers(User::all());
     }
 
     public function posts()
     {
-        $posts = Post::all();
-        return view('admin.posts', compact('posts'));
+        return view('admin.posts')->withPosts(Post::all());
     }
 
     public function categories()
     {
-        $categories = Category::all();
-
-        return view('admin.categories', compact('categories'));
+        return view('admin.categories')->withCategories(Category::all());
     }
 
     public function medals()
@@ -46,6 +41,6 @@ class AdminController extends Controller
 
     public function reports()
     {
-        return view('admin.reports', compact('reports'));
+        return view('admin.reports');
     }
 }

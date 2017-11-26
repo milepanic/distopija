@@ -16,10 +16,10 @@ class PostController extends Controller
         // verify
         
     	Post::create([
-    		'content' => request('content'),
-    		'category_id' => request('category'),
-    		'original' => request('original'),
-            'user_id' => Auth::user()->id
+    		'content' => $request->content,
+    		'category_id' => $request->category,
+    		'original' => $request->original,
+            'user_id' => Auth::id()
     	]);
 
     	return redirect('submit');
@@ -36,32 +36,26 @@ class PostController extends Controller
 
     public function edit($id)
     {
-        $post = Post::find($id);
-
-        return view('pages.edit', compact('post'));
+        return view('pages.edit')->withPost(Post::find($id));
     }
 
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
+        $user = $request->user();
 
-        $post->content = request('content');
-        if(request('original'))
-            $post->original = 1;
-        else
-            $post->original = null;
+        $post->content = $request->content;
+        $post->original = $request->original ? 1 : null;
 
         $post->save();
 
-        return redirect('v/' . $post->id);
-        // return view('pages.view', compact('post'));
+        // return redirect('v/' . $post->id); ?????
+        return view('pages.view', compact('post', 'user'));
     }
 
     public function delete($id)
     {
-        $post = Post::find($id);
-
-        $post->delete();
+        Post::destroy($id);
 
         return redirect('/');
     }
@@ -80,34 +74,18 @@ class PostController extends Controller
         // ako korisnik nije glasao - upisi $vote u tabelu
         if (!$post->votedBy($request->user())->count() > 0) {
             $request->user()->postVote()->attach($id, ['vote' => $vote]);
-            if ($vote === 1)
-                $post->increment('upvotes');
-            else
-                $post->increment('downvotes');
+
             return response()->json('Vas glas je upisan');
         }
 
         // ako korisnik zeli da ponisti svoj vote (vote === $vote) - obrisi red iz tabele
-        if ($post->votedBy($request->user())->first() === $vote) {
+        if ($post->votedBy($request->user())->first() === $vote) 
             $request->user()->postVote()->detach($id);
-            if ($vote === 1)
-                $post->decrement('upvotes');
-            else
-                $post->decrement('downvotes');
-        }
+        
         // ako korisnik promijeni vote (vote !== $vote) - update-uj vote
-        elseif ($post->votedBy($request->user())->first() !== $vote) {
+        elseif ($post->votedBy($request->user())->first() !== $vote) 
             $request->user()->postVote()->updateExistingPivot($id, ['vote' => $vote]);
-            if ($vote === 1) {
-                $post->decrement('downvotes');
-                $post->increment('upvotes');
-            }
-            else {
-                $post->decrement('upvotes');
-                $post->increment('downvotes');
-            }
-        }
-
+        
         return response()->json('Vas glas je promijenjen');
     }
 
@@ -117,8 +95,6 @@ class PostController extends Controller
 
         $request->user()->favoritePosts()->toggle($id);
 
-        // dodati +1 ili *1 u post->favorites
-
-        return response()->json('Success!');
+        return response()->json('Vic je dodat u omiljene');
     }
 }

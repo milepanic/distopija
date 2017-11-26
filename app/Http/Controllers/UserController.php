@@ -12,8 +12,8 @@ class UserController extends Controller
     {
     	$user = Auth::user()->find($id);
 
-    	$user->banned_until = request('date');
-    	$user->ban_message = request('reason');
+    	$user->banned_until = $request->date;
+    	$user->ban_message = $request->reason;
 
     	$user->save(); 
 

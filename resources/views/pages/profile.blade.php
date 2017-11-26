@@ -5,9 +5,6 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-
-				
-
 				<div class="col-md-4">
 					<img src="{{ asset('images/users/' . $user->id . '.png') }}" alt="">
 					<p>Ime: {{ $user->name }}</p>
@@ -20,7 +17,7 @@
 					zbir glasova
 					komentari
 
-					@if(Auth::check() && Auth::user()->id === $user->id)
+					@if(Auth::check() && Auth::id() === $user->id)
 						<p><a href="{{ url('profile/edit/' . $user->slug) }}">Promijeni osobine</a></p>
 						<p><a href="{{ url('profile/' . $user->slug . '/blocked') }}">Blocked categories</a></p>
 					@endif
@@ -28,18 +25,16 @@
 				</div>
 				<div class="col-md-6">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#">Vicevi ({{ $user->posts->count() }})</a></li>
+						<li class="active"><a href="#">Vicevi ({{ $user->posts_count }})</a></li>
 						<li><a href="#">Originalni vicevi (000)</a></li>
 						<li><a href="#">Omiljeni vicevi (000)</a></li>
 					</ul>
-
-					@foreach($posts as $post)
+					@foreach($user->posts as $post)
 						
 						@include('includes.joke')
 
 					@endforeach
 				</div>
-				
 			</div>
 		</div>
 	</div>

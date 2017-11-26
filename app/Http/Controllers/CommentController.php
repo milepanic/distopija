@@ -14,24 +14,16 @@ class CommentController extends Controller
         // validate
 
         Comment::create([
-            'comment' => request('comment'),
+            'comment' => $request->comment,
             'post_id' => $id,
-            'user_id' => Auth::user()->id
+            'user_id' => Auth::id()
         ]);
 
     	return redirect()->back();
     }
 
-    // public function read($post_id)
-    // {
-    //     $comments = Comment::where('post_id', $post_id)->get();
-    //     dd($comments);
-    // }
-
     public function update(Request $request, $id, $type)
     {
-        //validation
-
         $comment = Comment::find($id);
 
         $vote = $comment->votes;

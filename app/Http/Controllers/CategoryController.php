@@ -12,11 +12,11 @@ class CategoryController extends Controller
     public function create(Request $request)
     {
     	Category::create([
-    		'name' => request('name'),
-    		'nsfw' => request('nsfw'),
-    		'cover_box' => request('cover_box'),
-    		'pictures' => request('pictures'),
-    		'videos' => request('videos')
+    		'name' => $request->name,
+    		'nsfw' => $request->nsfw,
+    		'cover_box' => $request->cover_box,
+    		'pictures' => $request->pictures,
+    		'videos' => $request->videos
     	]);
 
     	return redirect('create');
@@ -26,8 +26,9 @@ class CategoryController extends Controller
     {
         $category = Category::where('name', $name)->first();
         $posts = Post::where('category_id', $category->id)->paginate(10);
+        $user = Auth::user();
 
-        return view('pages.category', compact('category', 'posts'));
+        return view('pages.category', compact('category', 'posts', 'user'));
     }
 
     // Blokirane kategorije se nece pojavljivati na pocetnoj strani, ali im se moze pristupiti
@@ -75,10 +76,8 @@ class CategoryController extends Controller
 
     public function delete($id)
     {
-        $category = Category::find($id);
-
-        $category->delete();
-
+        Category::destroy($id);
+        
         return redirect()->back();
     }
 }

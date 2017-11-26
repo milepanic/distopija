@@ -26,7 +26,7 @@ class MessageController extends Controller
     	$user = Auth::user(); 
 
     	$message = Message::create([
-    		'content' => request('content'),
+    		'content' => $request->content
     	]);
 
     	$message->users()->attach($user, ['reciever_id' => 1]);

@@ -24,7 +24,7 @@
 				@endcannot
 				<br>
 			<button class="btn favorite 
-						@if($user && $post->favoritedBy($user)) voted @endif" 
+						@if($user && $post->favoritedBy($user)) voted @endif"
 						data-id="{{ $post->id }}">Favorite
 			</button>
 			</p>
@@ -46,9 +46,9 @@
 			<p> Share </p>
 			<p> ------- </p>
 			<hr>
-			<p> <strong>Upvotes</strong>: {{ $post->upvotes }} </p>
-			<p> <strong>Downvotes</strong>: {{ $post->downvotes }} </p>
-			<p> <strong>Favorites</strong>: {{ $post->favorites }} </p>
+			<p> <strong>Upvotes</strong>:</p>
+			<p> <strong>Downvotes</strong>:</p>
+			<p> <strong>Favorites</strong>: {{ $post->favorites_count }}</p>
 		</div>
 	</div>
 	<div class="row">
@@ -97,7 +97,7 @@
 	</div>
 </div>
 
-@section('exteral-js')
+@section('external-js')
 	<script type="text/javascript">
 		$('.vote').click(function() {
 			var vote = {
@@ -121,10 +121,10 @@
 				url: '/post/vote',
 				data: vote,
 				success: function (data) {
-					
+
 				},
 				error: function() {
-					alert('Dogodila se greska');
+
 				}
 			});
 		});
@@ -144,7 +144,7 @@
 					
 				},
 				error: function() {
-					alert('Dogodila se greska');
+
 				}
 			});
 		});

@@ -30,9 +30,9 @@
                                 <td>{{ $post->user->name }}</td>
                                 <td>{{ $post->original }}</td>
                                 <td>{{ $post->category->name }}</td>
-                                <td> {{ $post->upvotes }} </td>
-                                <td> {{ $post->downvotes }} </td>
-                                <td> {{ $post->favorites }} </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td> 
                                 	{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
                                 </td>
