@@ -62,8 +62,8 @@ class PostController extends Controller
 
     public function vote(Request $request)
     {
-        $type = $request->input('type');
-        $id = $request->input('id');
+        $type = $request->type;
+        $id = $request->id;
         $post = Post::find($id);
 
         if ($type === 'upvote')
@@ -91,7 +91,7 @@ class PostController extends Controller
 
     public function favorite(Request $request)
     {
-        $id = $request->input('id');
+        $id = $request->id;
 
         $request->user()->favoritePosts()->toggle($id);
 

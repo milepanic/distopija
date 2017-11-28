@@ -1,5 +1,11 @@
 @extends('layouts.master')
 
+@section('external-include')
+	<!-- Cropper JS -->
+	<link  href="{{ asset('assets/cropper/cropper.css') }}" rel="stylesheet">
+    <script src="{{ asset('assets/cropper/cropper.js') }}"></script>
+@endsection
+
 @section('content')
 
 	<div class="container">
@@ -70,6 +76,7 @@
 		$("#input-picture").removeClass('hidden');
 	});
 
+	// Cropper
 	$(function () {
 		var image = $("#image");
 		var input = $("#profile-img");

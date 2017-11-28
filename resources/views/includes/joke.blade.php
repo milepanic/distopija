@@ -24,13 +24,13 @@
 				@endcannot
 				<br>
 			<button class="btn favorite 
-						@if($user && $post->favoritedBy($user)) voted @endif"
+						@if($user && $post->favorites->contains($user)) voted @endif"
 						data-id="{{ $post->id }}">Favorite
 			</button>
 			</p>
 	        <br>
 			<button id="upvote" data-type="upvote" data-id="{{ $post->id }}"
-					class="btn vote @if($user && $post->votedBy($user)->first() === 1) btn-primary @endif">
+					class="btn vote @if($user && $post->votes->contains($user)) btn-primary @endif">
 				Upvote
 			</button>
 			<button id="downvote" data-type="downvote" data-id="{{ $post->id }}"
@@ -45,9 +45,8 @@
 			<p> Report // napraviti u admin panelu tabelu u koju se upisuje korisnik, post i razlog </p>
 			<p> Share </p>
 			<p> ------- </p>
-			<hr>
-			<p> <strong>Upvotes</strong>:</p>
-			<p> <strong>Downvotes</strong>:</p>
+			<p> <strong>Upvotes</strong>: {{ $post->upvotes_count }}</p>
+			<p> <strong>Downvotes</strong>: {{ $post->downvotes_count }}</p>
 			<p> <strong>Favorites</strong>: {{ $post->favorites_count }}</p>
 		</div>
 	</div>

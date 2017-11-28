@@ -34,16 +34,16 @@ class Post extends Model
         return $this->belongsToMany('App\User', 'favorites');
     }
 
-    public function favoritedBy(User $user)
-    {
-        return $this->favorites()->where('user_id', $user->id)->exists();
-    }
+    // public function favoritedBy(User $user)
+    // {
+    //     return $this->favorites()->where('user_id', $user->id)->exists();
+    // }
 
     public function votes()
     {
-        return $this->belongsToMany('App\User', 'votes')->with('vote');
+        return $this->belongsToMany('App\User', 'votes')->withPivot('vote');
     }
-    // NIJE DOBRA VEZA, NE PREPOZNAJE SVOJ MODEL U PIVOT TABELI
+
     public function votedBy(User $user)
     {
         return $this->votes()->where('user_id', $user->id)->pluck('vote');

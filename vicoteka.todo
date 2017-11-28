@@ -1,12 +1,12 @@
 ADMIN PANEL:
    ✔ Middleware @done (17-10-24 12:48)
+   ☐ DataTables with AJAX
+   ☐ Vicoteka Bot - script for adding jokes from other sites
   Dashboard:
    ✔ Registered useres @done (17-10-26 01:01)
    ✔ Number of posts @done (17-10-26 01:01)
    ✔ -||-   of original posts @done (17-10-26 01:01)
    ☐ Activity graph
-   ☐ Social network likes
-   ☐ Morris charts
    ...
   Users:
    ☐ Last active
@@ -18,7 +18,7 @@ ADMIN PANEL:
   Posts:
    ✔ Delete @done (17-10-25 17:18)
    ☐ Edit every field
-   ☐ Delete soft deletes every 3 days
+   ☐ Delete soft deletes every 7 days
   Categories:
    ✔ Approve/Reject @done (17-10-25 17:31)
    ☐ Edit every field
@@ -38,12 +38,11 @@ FRONT PAGE:
  ☐ Delete comment
  ☐ Reply to comment
  ☐ Upvote/Downvote comment
- ☐ View composer for sidebar
+ ☐ Sidebar
 
  PROFILE:
   ✔ User info @done (17-11-07 21:09)
   ✔ User posts @done (17-11-07 21:09)
-  ☐ Original posts
   ✔ Favorited posts @done (17-11-15 00:11)
   ☐ Change between original/favorite/posts
   ✔ Change user info @done (17-11-07 20:41)
@@ -56,13 +55,14 @@ FRONT PAGE:
 LOGIC:
  ☐ Inbox
  ☐ Notifications
+ ☐ Moderators for categories
 
 OTHER:
  ✔ Datatables @done (17-10-26 23:16)
  ✔ Comments @done (17-10-29 22:52)
  ✔ Seeder @done (17-10-25 22:49)
  ☐ Social Login
- ☐ Eager loading - comments
+ ☐ Eager loading
  ☐ Cache queries on welcome page
  ☐ Validation
 

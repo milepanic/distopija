@@ -16,7 +16,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
-        
+
         if(Auth::check()) {
             // Gets all posts which category the user did not block
             // Gets 'id' of where blocked = 1 from pivot table and shows posts which category does not have that 'id'
@@ -27,12 +27,22 @@ class HomeController extends Controller
                             ->toArray();
 
             $posts = Post::whereNotIn('category_id', $blocked)
-                            ->with(['comments.user', 'user', 'category'])
+                            ->with(['comments.user', 'user', 'category', 'favorites', 'votes'])
+                            ->withCount([
+                                'favorites',
+                                'votes as upvotes_count' => function ($query) {
+                                    $query->where('vote', 1);
+                                },
+                                'votes as downvotes_count' => function ($query) {
+                                    $query->where('vote', -1);
+                                }
+                            ])
                             ->latest()
                             ->paginate(10);
         } else {
             $posts = Post::with('user', 'category')->latest()->paginate(10);
         }
+        // dd(Post::find(21)->votes);
 
         return view('pages.welcome', compact('user', 'posts', 'comments.user'));
     }
@@ -65,15 +75,15 @@ class HomeController extends Controller
             
         $user = Auth::user()->find($id);
 
-        $name = $request->name;
-        $email = $request->email;
-        $description = $request->description;
-        $slug = str_slug($name);
+        // $name = $request->name;
+        // $email = $request->email;
+        // $description = $request->description;
+        // $slug = str_slug($name);
 
-        $user->name = $name;
-        $user->email = $email;
-        $user->description = $description;
-        $user->slug = $slug;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->description = $request->description;
+        $user->slug = str_slug($request->name);
 
         $user->save();
 
