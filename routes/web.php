@@ -34,9 +34,10 @@ Route::group(['middleware' => 'banned'], function () {
 	Route::post('comment/{id}/{type}', 'CommentController@update');
 
 	Route::group(['prefix' => 'inbox'], function() {
-		Route::get('/', 'MessageController@view')->name('inbox');
-		Route::get('compose', 'MessageController@compose');
+		Route::get('/', 'MessageController@inbox')->name('inbox');
+		Route::get('compose/{id?}', 'MessageController@compose');
 		Route::post('new', 'MessageController@new');
+		Route::get('view/{id}', 'MessageController@messages');
 	});
 
 	Auth::routes();
@@ -46,7 +47,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 	Route::get('/', 'AdminController@dashboard')->name('Dashboard');
 	
 	Route::get('users', 'AdminController@users')->name('Users');
-	Route::get('users/ban/{id}', 'UserController@banUser');
+	Route::post('users/ban/{id}', 'UserController@banUser');
 	Route::get('users/unban/{id}', 'UserController@unbanUser');
 
 	Route::get('posts', 'AdminController@posts')->name('Posts');

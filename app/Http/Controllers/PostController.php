@@ -13,8 +13,6 @@ class PostController extends Controller
 {
     public function create(Request $request)
     {
-        // verify
-        
     	Post::create([
     		'content' => $request->content,
     		'category_id' => $request->category,

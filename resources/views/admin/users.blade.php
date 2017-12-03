@@ -70,7 +70,7 @@
                 <h3 class="modal-title">You are banning </h3>
                 </div>
                 <div class="modal-body">
-                    <form class="modal-form" {{-- action="{{ url('users/ban/' . $user->id) }}" --}}>
+                    <form class="modal-form" action="{{ url('admin/users/ban/23') }}" method="POST">
                     {{ CSRF_FIELD() }}
                     <p>Choose ban date</p>
                     <input name="date" type="date" class="form-control">

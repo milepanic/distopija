@@ -8,29 +8,46 @@ use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
-    public function view()
+    public function inbox()
     {
     	$user = Auth::user();
-    	$messages = $user->messages()->where('reciever_id', Auth::user()->id)->get();
+    	$messages = $user->messages()
+                         ->groupBy('user_id')
+                         ->having('reciever_id', $user->id)
+                         ->get();
 
     	return view('pages.inbox.inbox', compact('messages'));
     }
 
-    public function compose()
+    public function compose($id = null)
     {
-    	return view('pages.inbox.compose');
+    	return view('pages.inbox.compose', compact('id'));
     }
 
     public function new(Request $request)
     {
-    	$user = Auth::user(); 
-
     	$message = Message::create([
     		'content' => $request->content
     	]);
 
-    	$message->users()->attach($user, ['reciever_id' => 1]);
-
+    	$message->users()->attach(
+            Auth::id(), 
+            ['reciever_id' => $request->reciever]
+        );
+        // ako je request is compose-a, redirektuj na inbox, a ako je is message - redirekt back
     	return redirect('inbox');
+    }
+
+    public function messages($id)
+    {
+        $user = Auth::user();
+        $messages = $user->messages()
+                         ->where([
+                             ['reciever_id', $user->id], 
+                             ['user_id', $id],
+                         ])
+                         ->get();
+
+        return view('pages.inbox.view', compact('user', 'messages'));
     }
 }

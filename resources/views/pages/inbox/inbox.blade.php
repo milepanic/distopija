@@ -15,15 +15,7 @@
 							<p>From: {{ $message->pivot->user_id }}</p>
 							<p>Content: {{ $message->content }}</p>
 							<p>Time: {{ \Carbon\Carbon::parse($message->created_at)->diffForHumans() }}</p>
-							<form action="{{ url('inbox/new') }}" class="form-horizontal">
-								{{ csrf_field() }}
-								<div class="form-group">
-									<div class="col-md-12">
-										<textarea name="content"  rows="2" class="form-control top-buffer" id="content" placeholder="Odgovori" required></textarea>
-									</div>
-								</div>
-								<button class="btn btn-primary" type="submit">Posalji</button>
-							</form>
+							<p><a href="{{ url('inbox/view/' . $message->pivot->user_id) }}">Idi u poruke</a></p>
 							<hr>
 						</div>
 					</div>

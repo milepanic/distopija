@@ -10,6 +10,7 @@
 					<p>Ime: {{ $user->name }}</p>
 					<p>Opis: {{ $user->description }}</p>
 					<p>Bodovi: {{ $user->points }}</p>
+					<p><a href="{{ url('inbox/compose/' . $user->id) }}">Posalji poruku</a></p>
 					<br>
 					<p>Statistika</p>
 					<p>Registrovan: {{ \Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</p>

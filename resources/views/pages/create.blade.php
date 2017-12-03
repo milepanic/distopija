@@ -60,6 +60,17 @@
 					</div>
 					<div class="form-group">
 						<div class="col-md-4">
+							<div class="col-sm col-md-4">
+						      <div class="checkbox">
+						        <label class="col-md-4">
+						          <input type="checkbox" name="mods_only" value="1"> <p>Mods only - ne radi</p>
+						        </label>
+						      </div>
+						    </div>						
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-4">
 							<button type="submit" class="btn col-md-12 btn-primary">Napravi kategoriju</button>
 						</div>
 					</div>

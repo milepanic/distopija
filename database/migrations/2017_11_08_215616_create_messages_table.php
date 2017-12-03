@@ -16,7 +16,7 @@ class CreateMessagesTable extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
             $table->text('content');
-            $table->tinyInteger('seen')->default(0);
+            $table->boolean('seen')->default(false);
             $table->timestamps();
         });
 
@@ -24,6 +24,7 @@ class CreateMessagesTable extends Migration
             $table->integer('user_id');
             $table->integer('message_id');
             $table->integer('reciever_id');
+            // primarni kljuc
         });
     }
 

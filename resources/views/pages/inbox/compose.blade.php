@@ -9,12 +9,13 @@
 					{{ csrf_field() }}
 					<div class="form-group">
 						<div class="col-md-4">
-							<input type="text" name="reciever" placeholder="To..." required class="form-control">
+							<input type="text" name="reciever" placeholder="To..." value="{{ $id }}" 
+							required class="form-control">
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-md-4">
-							<textarea name="content" required class="form-control" cols="30" rows="10"></textarea>
+							<textarea name="content" required class="form-control" cols="30" rows="10" placeholder="Message"></textarea>
 						</div>
 					</div>
 					<div class="form-group">

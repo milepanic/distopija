@@ -75,11 +75,6 @@ class HomeController extends Controller
             
         $user = Auth::user()->find($id);
 
-        // $name = $request->name;
-        // $email = $request->email;
-        // $description = $request->description;
-        // $slug = str_slug($name);
-
         $user->name = $request->name;
         $user->email = $request->email;
         $user->description = $request->description;
