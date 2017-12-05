@@ -13,7 +13,7 @@ ADMIN PANEL:
    ✔ Ban/Unban user @done (17-10-25 16:26)
    ✔ Select ban date @done (17-10-30 00:16)
    ✔ Ban info @done (17-10-30 00:16)
-   ☐ Make bootstrap modal for bans 
+   ✔ Make bootstrap modal for bans @done (17-12-03 11:56)
    ☐ Send message
   Posts:
    ✔ Delete @done (17-10-25 17:18)
@@ -53,22 +53,17 @@ FRONT PAGE:
   ☐ User points
   ☐ Medals
 
-LOGIC:
+OTHER:
  ☐ Inbox
  ☐ Notifications
  ☐ Moderators for categories
  ☐ Search
-
-OTHER:
+ ☐ Subscribe to user
  ✔ Datatables @done (17-10-26 23:16)
- ✔ Comments @done (17-10-29 22:52)
  ✔ Seeder @done (17-10-25 22:49)
  ☐ Social Login
  ☐ Eager loading
  ☐ Cache queries on welcome page
  ☐ Validation
-
-LATER:
- ☐ Use JavaScript
- ☐ Use Bulma CSS Framework for design
-
+ ☐ Mail
+ ☐ Scope for posts

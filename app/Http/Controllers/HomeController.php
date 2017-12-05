@@ -55,7 +55,7 @@ class HomeController extends Controller
                             ->withCount('posts')
                             ->first();
 
-        return view('pages.profile', compact('user', 'posts', 'origc'));
+        return view('pages.profile', compact('user', 'posts'));
     }
 
     public function edit($slug)
@@ -72,7 +72,7 @@ class HomeController extends Controller
     {
         if(!Auth::user()->id === $id)
             abort(403);
-            
+
         $user = Auth::user()->find($id);
 
         $user->name = $request->name;

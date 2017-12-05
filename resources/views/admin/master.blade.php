@@ -12,14 +12,8 @@
         <!-- Bootstrap Core CSS -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 
-        <!-- Timeline CSS -->
-        <link href="{{ asset('css/timeline.css') }}" rel="stylesheet">
-
         <!-- Custom CSS -->
         <link href="{{ asset('css/startmin.css') }}" rel="stylesheet">
-
-        <!-- Morris Charts CSS -->
-        <link href="{{ asset('css/morris.css') }}" rel="stylesheet">
 
         <!-- Custom Fonts -->
         <link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -154,6 +148,8 @@
 
         <!-- Custom Theme JavaScript -->
         <script src="{{ asset('js/startmin.js') }}"></script>
+
+        @yield('external-js')
 
     </body>
 </html>

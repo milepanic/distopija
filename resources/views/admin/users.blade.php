@@ -40,9 +40,9 @@
                                 </td>
                                 <!-- Modal -->
                                 <td>
-                                	<a class="text-danger" title="Ban user {{ $user->name }}"
+                                	<a class="text-danger ban" title="Ban user {{ $user->name }}"
                                         data-toggle="modal" data-target="#myModal" data-name="{{ $user->name }}" data-id="{{ $user->id }}">
-                                		Ne radi <i class="fa fa-ban" aria-hidden="true"></i>
+                                		<i class="fa fa-ban" aria-hidden="true"></i>
                                 	</a>&nbsp;
                                 	<a class="text-success" title="Unban user {{ $user->name }}"
                                 		href="users/unban/{{ $user->id }}">
@@ -67,10 +67,10 @@
             <div class="modal-content">
                 <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">You are banning </h3>
+                <h3 class="modal-title"></h3>
                 </div>
                 <div class="modal-body">
-                    <form class="modal-form" action="{{ url('admin/users/ban/23') }}" method="POST">
+                    <form class="modal-form" method="POST">
                     {{ CSRF_FIELD() }}
                     <p>Choose ban date</p>
                     <input name="date" type="date" class="form-control">
@@ -88,17 +88,22 @@
         </div>
     </div>
 
+    @section('external-js')
     <script>
-        $('#myModal').click(function (event) {
-            alert('rarr');
-            var name = a.data('name');
-            var id = a.data('id');
-            
-            var modal = $(this);
-            modal.find('.modal-form').action('users/ban/' + id);
-            modal.find('.modal-title').text('You are banning ' + name);
-            modal.find('.modal-body input').val(recipient);
+        $(document).ready(function(){
+            $('#dataTable').DataTable();
         });
+
+        $('.ban').click(function (event) {
+            var name = $(this).data('name');
+            var id = $(this).data('id');            
+            
+            var modal = $("#myModal");
+            modal.find('.modal-form').attr('action', 'users/ban/' + id);
+            modal.find('.modal-title').text('You are banning ' + name);
+        });
+
     </script>
+    @endsection
 
 @endsection
