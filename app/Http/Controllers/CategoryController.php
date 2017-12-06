@@ -37,7 +37,7 @@ class CategoryController extends Controller
         $user = Auth::user();
         $category = Category::find($id);
 
-        $category->users()->attach($user->id, ['blocked' => 1]);
+        $category->users()->attach($user->id, ['blocked' => true]);
 
         return redirect('/');        
     }
@@ -47,7 +47,7 @@ class CategoryController extends Controller
         $user = Auth::user();
         $category = Category::find($id);
 
-        $category->users()->detach($user->id, ['blocked' => 0]);
+        $category->users()->detach($user->id);
 
         return back();        
     }
@@ -56,7 +56,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-        $category->approved = 2;
+        $category->approved = true;
 
         $category->save();
 
@@ -67,7 +67,7 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
 
-        $category->approved = 1;
+        $category->approved = false;
 
         $category->save();
 

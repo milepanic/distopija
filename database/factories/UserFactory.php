@@ -12,7 +12,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'slug' => function (array $user) {
         	return str_slug($user['name']);
         },
+        'description' => $faker->paragraph,
         'remember_token' => str_random(10),
-        'admin' => $faker->numberBetween($min = 0, $max = 1),
     ];
 });

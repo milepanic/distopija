@@ -23,9 +23,6 @@ ADMIN PANEL:
    ✔ Approve/Reject @done (17-10-25 17:31)
    ☐ Edit every field
 
-
-
-
 FRONT PAGE:
  ✔ Pagination @done (17-10-30 20:16)
  ✔ Edit posts @done (17-10-30 20:50)
@@ -40,6 +37,7 @@ FRONT PAGE:
  ☐ Upvote/Downvote comment
  ☐ Sidebar
  ☐ Footer
+ ✔ Change between trending/new/top... @done (17-12-06 03:25)
 
  PROFILE:
   ✔ User info @done (17-11-07 21:09)
@@ -66,4 +64,6 @@ OTHER:
  ☐ Cache queries on welcome page
  ☐ Validation
  ☐ Mail
- ☐ Scope for posts
+ ✔ Scope for posts @done (17-12-06 03:23)
+ ☐ getRouteKeyName to slug for users
+ ☐ Session flash

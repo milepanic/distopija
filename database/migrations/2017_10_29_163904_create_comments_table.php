@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->increments('id');
             $table->text('comment');
             $table->integer('votes')->default(0);
-            $table->integer('reply_id')->default(0);
+            $table->integer('reply_id')->nullable();
             $table->integer('post_id');
             $table->integer('user_id');
             $table->timestamps();
@@ -37,6 +37,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('comments', 'comment_user_vote');
     }
 }

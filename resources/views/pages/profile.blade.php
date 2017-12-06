@@ -27,8 +27,8 @@
 				<div class="col-md-6">
 					<ul class="nav nav-tabs">
 						<li class="active"><a href="#">Vicevi ({{ $user->posts_count }})</a></li>
-						<li><a href="#">Originalni vicevi (000)</a></li>
-						<li><a href="#">Omiljeni vicevi (000)</a></li>
+						<li><a href="#">Originalni vicevi ({{ $user->original_count }})</a></li>
+						<li><a href="#">Omiljeni vicevi ({{ $user->favorite_count }})</a></li>
 					</ul>
 					@foreach($user->posts as $post)
 						

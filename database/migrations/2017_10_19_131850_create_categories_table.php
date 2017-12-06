@@ -16,12 +16,12 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
-            $table->tinyInteger('nsfw')->nullable();
-            $table->tinyInteger('cover_box')->nullable(); //box koji prekriva punchline
-            $table->tinyInteger('pictures')->nullable();
-            $table->tinyInteger('videos')->nullable();
+            $table->boolean('nsfw')->nullable();
+            $table->boolean('cover_box')->nullable(); //box koji prekriva punchline
+            $table->boolean('pictures')->nullable();
+            $table->boolean('videos')->nullable();
             // da li korisnici mogu postavljati viceve ili samo admini
-            $table->tinyInteger('approved')->default(0);
+            $table->boolean('approved')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,10 +29,8 @@ class CreateCategoriesTable extends Migration
         Schema::create('category_user', function (Blueprint $table){
             $table->integer('category_id');
             $table->integer('user_id');
-            $table->tinyInteger('blocked')->default(0);
-            $table->tinyInteger('moderator')->default(0);
-
-            //$table->primary(['category_id', 'user_id']);
+            $table->boolean('blocked')->nullable();
+            $table->boolean('moderator')->nullable();
         });
     }
 
@@ -43,6 +41,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('categories', 'category_user');
     }
 }

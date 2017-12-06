@@ -5,9 +5,9 @@ use Faker\Generator as Faker;
 $factory->define(App\Category::class, function (Faker $faker) {
     return [
         'name' => $faker->lastName,
-        'nsfw' => $faker->numberBetween($min = 0, $max = 1),
-        'cover_box' => $faker->numberBetween($min = 0, $max = 1),
-        'pictures' => $faker->numberBetween($min = 0, $max = 1),
-        'videos' => $faker->numberBetween($min = 0, $max = 1),
+        'nsfw' => $faker->boolean,
+        'cover_box' => $faker->boolean,
+        'pictures' => $faker->boolean,
+        'videos' => $faker->boolean,
     ];
 });

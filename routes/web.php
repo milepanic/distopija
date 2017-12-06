@@ -3,7 +3,6 @@
 Route::group(['middleware' => 'banned'], function () {
 
 	// PAGES
-	Route::get('/', 'HomeController@index');
 	Route::get('profile/{name}', 'HomeController@profile');
 	Route::get('profile/edit/{name}', 'HomeController@edit');
 	Route::put('profile/edit/{id}', 'HomeController@update');
@@ -33,6 +32,7 @@ Route::group(['middleware' => 'banned'], function () {
 	Route::post('comment/{id}', 'CommentController@create');
 	Route::post('comment/{id}/{type}', 'CommentController@update');
 
+	// INBOX
 	Route::group(['prefix' => 'inbox'], function() {
 		Route::get('/', 'MessageController@inbox')->name('inbox');
 		Route::get('compose/{id?}', 'MessageController@compose');
@@ -62,3 +62,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
 
 	Route::get('reports', 'AdminController@reports')->name('Reports');
 });
+
+// WELLCOME PAGE
+Route::get('//{filter?}', 'HomeController@index');

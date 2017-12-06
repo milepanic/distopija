@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->text('description')->nullable();
-            $table->integer('admin')->default(0);
+            $table->boolean('admin')->nullable();
             $table->integer('points')->default(0);
             $table->date('banned_until')->nullable();
             $table->string('ban_message')->nullable();

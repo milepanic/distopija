@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->text('content');
-            $table->tinyInteger('original')->nullable();
+            $table->boolean('original')->nullable();
             $table->integer('category_id');
             $table->integer('user_id');
             //social-shares
