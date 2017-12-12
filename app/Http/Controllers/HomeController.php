@@ -38,7 +38,7 @@ class HomeController extends Controller
                                 $query->where('original', 1);
                             },
                             'favoritePosts as favorite_count' => function ($query) {
-                                $query->where('favorites.user_id', 1); // TODO: proslijediti korisnika
+                                $query->whereRaw('favorites.user_id = users.id');
                             }
                         ])
                         ->first();
@@ -49,7 +49,7 @@ class HomeController extends Controller
     public function edit($slug)
     {
         if(Auth::user()->slug !== $slug)
-            abort(403); // postaviti gate
+            abort(403); // TODO: postaviti gate
 
         $user = Auth::user()->where('slug', $slug)->first();
 

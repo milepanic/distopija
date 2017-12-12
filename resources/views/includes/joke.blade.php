@@ -24,7 +24,7 @@
 			</p>
 	        <br>
 			<button id="upvote" data-type="upvote" data-id="{{ $post->id }}"
-					class="btn vote @if($user && $post->votes->contains($user)) btn-primary @endif">
+					class="btn vote @if($user && $post->votedBy($user)->first() === 1) btn-primary @endif">
 				Upvote
 			</button>
 			<button id="downvote" data-type="downvote" data-id="{{ $post->id }}"
@@ -51,28 +51,32 @@
 	            <div class="form-group">
 	                <button type="submit" class="btn btn-default">Add</button>
 	            </div>
-	        </form>
+	        </form><br><br>
 	
 	        @forelse($post->comments as $comment)
 				
-	        	<p> Komentar: {{ $comment->comment }} </p>
-	        	<p> ID: {{ $comment->id }} </p>
-	        	<p> Votes: {{ $comment->votes }} </p>
-	        	<p> Postavio: {{ $comment->user->name }} </p>
-	        	<p> Datum: {{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }} </p>
-	        	<br>
-	        	<p>
-	        		<form action="{{ url('comment/' . $comment->id . '/up') }}" method="POST">
-	        			{{ csrf_field() }}
-	        			<button type="submit" class="btn btn-primary">Upvote</button>
-	        		</form>
-	        		<form action="{{ url('comment/' . $comment->id . '/down') }}" method="POST">
-	        			{{ csrf_field() }}
-	        			<button type="submit" class="btn btn-danger">Downvote</button>
-	        		</form>
-	        	</p>
-	        	<p> <a href="#">Delete</a> </p>
-	        	<hr>
+	        	<div class="comment-div">
+	        		<div class="comment-box">
+	        			<p data-id="{{ $comment->id }}" class="comment">{{ $comment->comment }}</p>
+	        		</div><br>
+		        	<p> Postavio: {{ $comment->user->name }} </p>
+		        	<p> Datum: {{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }} </p>
+		        	<p>
+		        		<form action="{{ url('comment/' . $comment->id . '/up') }}" method="POST">
+		        			{{ csrf_field() }}
+		        			<button type="submit" class="btn btn-primary">Upvote</button>
+		        		</form>
+		        		<form action="{{ url('comment/' . $comment->id . '/down') }}" method="POST">
+		        			{{ csrf_field() }}
+		        			<button type="submit" class="btn btn-danger">Downvote</button>
+		        		</form>
+		        	</p>
+		        	@can('edit', $comment)
+		        		<a class="edit" href="#">Edit</a>
+			        	<a class="delete" href="#">Delete</a>
+			        @endcan
+		        	<hr>
+	        	</div>
 
 	        @empty
 
@@ -83,57 +87,3 @@
 		</div>
 	</div>
 </div>
-
-@section('external-js')
-	<script type="text/javascript">
-		$('.vote').click(function() {
-			var vote = {
-				type: $(this).data('type'),
-				id: $(this).data('id')
-			};
-
-			if($(this).data('type') === 'upvote') {
-				if($('#downvote').hasClass('btn-danger'))
-					$('#downvote').removeClass('btn-danger');
-				$(this).toggleClass('btn-primary');
-			}
-			else {
-				if($('#upvote').hasClass('btn-primary'))
-					$('#upvote').removeClass('btn-primary');
-				$(this).toggleClass('btn-danger');
-			}
-
-			$.ajax({
-				type: 'POST',
-				url: '/post/vote',
-				data: vote,
-				success: function (data) {
-
-				},
-				error: function() {
-
-				}
-			});
-		});
-
-		$('.favorite').click(function() {
-			var vote = {
-				id: $(this).data('id')
-			};
-
-			$(this).toggleClass('voted');
-
-			$.ajax({
-				type: 'POST',
-				url: '/post/favorite',
-				data: vote,
-				success: function (data) {
-					
-				},
-				error: function() {
-
-				}
-			});
-		});
-	</script>
-@endsection

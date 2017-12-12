@@ -46,5 +46,21 @@ class CommentController extends Controller
 
         return redirect()->back();
     }
+
+    public function edit(Request $request, $id)
+    {
+        $comment = Comment::find($id);
+
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        return response()->json($request->comment);
+    }
     
+    public function delete($id)
+    {
+        Comment::destroy($id);
+
+        return response()->json('Comment has been deleted');
+    }
 }

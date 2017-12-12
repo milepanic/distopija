@@ -26,7 +26,7 @@ class CreateCommentsTable extends Migration
         Schema::create('comment_user_vote', function (Blueprint $table) {
             $table->integer('comment_id');
             $table->integer('user_id');
-            $table->string('vote', 11);
+            $table->TinyInteger('vote');
         });
     }
 

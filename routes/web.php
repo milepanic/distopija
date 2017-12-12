@@ -30,6 +30,8 @@ Route::group(['middleware' => 'banned'], function () {
 
 	// COMMENTS
 	Route::post('comment/{id}', 'CommentController@create');
+	Route::patch('comment/edit/{id}', 'CommentController@edit');
+	Route::delete('comment/delete/{id}', 'CommentController@delete');
 	Route::post('comment/{id}/{type}', 'CommentController@update');
 
 	// INBOX

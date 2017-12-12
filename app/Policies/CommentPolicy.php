@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
+use App\Comment;
 use App\User;
-use App\Post;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PostPolicy
+class CommentPolicy
 {
     use HandlesAuthorization;
 
@@ -25,8 +25,8 @@ class PostPolicy
         return $user->admin === 1 ? true : false;
     }
 
-    public function update(User $user, Post $post)
+    public function edit(User $user, Comment $comment)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $comment->user_id;
     }
 }

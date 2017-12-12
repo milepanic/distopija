@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-	
 	<div class="container">
 		<div class="row">
 			<ul class="nav nav-tabs">
@@ -25,30 +24,4 @@
 		@include('includes.jokes')
 	</div>
 
-@endsection
-
-@section('main-js')
-	<script>
-
-		$(".nav-tabs li a").click(function(e) {
-			e.preventDefault();
-			var type = $(this).data('type');
-
-			window.location.pathname = '/' + type;
-			
-			$.ajax({
-				type: 'GET',
-				url: '/' + type,
-				data: type,
-				success: function(data) {
-					$(this).parent().addClass('active');
-					$("#jokes").html(data);
-				},
-				error: function() {
-					/* Act on the event */
-				}
-			});
-		});
-
-	</script>
 @endsection

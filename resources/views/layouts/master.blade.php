@@ -8,13 +8,6 @@
 	<!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    <!-- Bootstrap CSS -->
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}"> --}}
-
-    <!-- Theme Styles CSS -->
-    {{-- <link rel="stylesheet" type="text/css" href="{{ asset('css/theme-styles.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/blocks.css') }}"> --}}
-
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     
@@ -45,18 +38,11 @@
 		@include('includes.footer')
 	</div>
 
-    <script type="text/javascript">
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    </script>
+    <!-- Custom JS -->
+    <script src="{{ asset('js/app.js') }}"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     
-    @yield('main-js')
-    @yield('external-js')
 </body>
 </html>
