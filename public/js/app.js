@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+	// AJAX CSRF Token
 	$.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -58,7 +59,7 @@ $(document).ready(function() {
 		});
 	});
 
-	// function on favoriting posts
+	// function for favoriting posts
 	$('.favorite').click(function() {
 		var vote = {
 			id: $(this).data('id')
@@ -79,6 +80,13 @@ $(document).ready(function() {
 		});
 	});
 
+	$('.comments-icon').on('click', function(e) {
+		e.preventDefault();
+		// show/hide comment section for a post
+		$(this).parents().eq(2).find('.comments-container').toggleClass('hidden');
+	});
+
+	// editing comments
 	$('.edit').on('click', function(e) {
 		e.preventDefault();
 		var comment_p = $(this).parent().find('.comment');
@@ -115,6 +123,7 @@ $(document).ready(function() {
 		});
 	});
 
+	// deleting comments
 	$('.delete').on('click', function(e) {
 		e.preventDefault();
 		var comment_div = $(this).parent();

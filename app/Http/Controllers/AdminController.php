@@ -12,9 +12,9 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $userCount = User::count();
-        $postCount = Post::count();
-        $originalPostCount = Post::where('original', '=', '1')->count();
+        $userCount      = User::count();
+        $postCount      = Post::count();
+        $originalCount  = Post::where('original', '=', '1')->count();
 
         return view('admin.dashboard', compact('userCount', 'postCount', 'originalPostCount'));
     }

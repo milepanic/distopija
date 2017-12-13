@@ -7,6 +7,17 @@
 			<div class="col-md-12">
 				<div class="col-md-4">
 					<img src="{{ asset('images/users/' . $user->id . '.png') }}" alt="">
+					@if(Auth::user() && $user->id !== Auth::id())
+					<form action="{{ url('subscribe/' . $user->id) }}" method="POST">
+						{{ csrf_field() }}
+						@if(Auth::user()->subscription->contains($user->id)) 
+							<button class="btn btn-danger col-md-12" type="submit">Unubscribe</button>
+						@else
+							<button class="btn btn-warning col-md-12" type="submit">Subscribe</button>
+						@endif
+						
+					</form>
+					@endif
 					<p>Ime: {{ $user->name }}</p>
 					<p>Opis: {{ $user->description }}</p>
 					<p>Bodovi: {{ $user->points }}</p>
@@ -14,6 +25,8 @@
 					<br>
 					<p>Statistika</p>
 					<p>Registrovan: {{ \Carbon\Carbon::parse($user->created_at)->diffForHumans() }}</p>
+					<a href="#">Pretplate: {{ $user->subscription_count }}</a>
+					<br>
 					poslednja aktivnost
 					zbir glasova
 					komentari
@@ -33,8 +46,11 @@
 					@foreach($user->posts as $post)
 						
 						@include('includes.joke')
+						<hr>
 
 					@endforeach
+
+
 				</div>
 			</div>
 		</div>

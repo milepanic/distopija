@@ -16,6 +16,9 @@
 				<li class="{{ Request::is('original') ? 'active' : '' }}">
 					<a class="tab" data-type="original" href="#">Original</a>
 				</li>
+				<li class="{{ Request::is('subscriptions') ? 'active' : '' }}">
+					<a class="tab" data-type="subscriptions" href="#">Subscriptions</a>
+				</li>
 			</ul><br>
 		</div>
 	</div>

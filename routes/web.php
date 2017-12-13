@@ -34,6 +34,9 @@ Route::group(['middleware' => 'banned'], function () {
 	Route::delete('comment/delete/{id}', 'CommentController@delete');
 	Route::post('comment/{id}/{type}', 'CommentController@update');
 
+	// SUBSCRIBE
+	Route::post('subscribe/{id}', 'UserController@subscribe');
+
 	// INBOX
 	Route::group(['prefix' => 'inbox'], function() {
 		Route::get('/', 'MessageController@inbox')->name('inbox');

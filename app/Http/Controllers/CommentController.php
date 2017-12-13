@@ -41,9 +41,9 @@ class CommentController extends Controller
         $comment->save();
 
         CommentVote::create([
-            'comment_id' => $id,
-            'user_id' => Auth::user()->id,
-            'vote' => $type
+            'comment_id'    => $id,
+            'user_id'       => Auth::user()->id,
+            'vote'          => $type
         ]);
 
         return redirect()->back();

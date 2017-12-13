@@ -38,6 +38,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Message')->withPivot('reciever_id');
     }
 
+    public function subscription()
+    {
+        return $this->belongsToMany('App\User', 'subscription', 'subscriber_id');
+    }
+
     public function isBanned()
     {
         if($this->banned_until && Carbon::now() <= $this->banned_until)

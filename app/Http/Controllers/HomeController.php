@@ -34,6 +34,7 @@ class HomeController extends Controller
                         ->with('posts')
                         ->withCount([
                             'posts',
+                            'subscription',
                             'posts as original_count' => function ($query) {
                                 $query->where('original', 1);
                             },
@@ -62,17 +63,17 @@ class HomeController extends Controller
             abort(403);
 
         $request->validate([
-            'name' => 'required|min:3|alpha_num|max:255|unique:users,name,' . Auth::id(),
-            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
-            'description' => 'nullable|string|max:1000',
+            'name'          => 'required|min:3|alpha_num|max:255|unique:users,name,' . Auth::id(),
+            'email'         => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+            'description'   => 'nullable|string|max:1000',
         ]);
 
         $user = Auth::user()->find($id);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->description = $request->description;
-        $user->slug = str_slug($request->name);
+        $user->name         = $request->name;
+        $user->email        = $request->email;
+        $user->description  = $request->description;
+        $user->slug         = str_slug($request->name);
 
         $user->save();
 
@@ -85,9 +86,9 @@ class HomeController extends Controller
             'croppedImage' => 'required|image',
         ]);
 
-        $image = $request->croppedImage;
-        $user = $request->user();
-        $location = public_path('images/users/' . $user->id . '.png');
+        $image      = $request->croppedImage;
+        $user       = $request->user();
+        $location   = public_path('images/users/' . $user->id . '.png');
 
         Image::make($image)->resize(300, 300)->encode('png')->save($location);
 
@@ -96,8 +97,8 @@ class HomeController extends Controller
 
     public function blocked($slug)
     {
-        $user = User::where('slug', $slug)->first();
-        $blocked = $user->categories()->where('blocked', true)->get();
+        $user       = User::where('slug', $slug)->first();
+        $blocked    = $user->categories()->where('blocked', true)->get();
 
         return view('pages.blocked', compact('blocked'));
     }

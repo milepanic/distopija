@@ -60,6 +60,7 @@ class Post extends Model
                     ->with(['comments.user', 'user', 'category', 'favorites', 'votes'])
                     ->withCount([
                         'favorites',
+                        'comments',
                         'votes as upvotes_count' => function ($query) {
                             $query->where('vote', 1);
                         },
@@ -80,9 +81,13 @@ class Post extends Model
                 break;
             case 'original':
                 return $query->where('original', true);
+                break;
+            case 'subscriptions':
+                
+                break;
             // case: trending
             default:
-                // funckija za trending
+                
                 break;
         }
     }

@@ -7,22 +7,19 @@
 			<p> <strong>Category:</strong> <a href="{{ url('k/' . $post->category->name) }}"> {{ $post->category->name }} </a> </p>
 			<p> <strong>Date</strong>: <a href="{{ url('v/' . $post->id) }}">{{ (\Carbon\Carbon::parse($post->created_at)->diffForHumans() ) }}</a> </p>
 			<hr>
-			<p> 
-				@can('update', $post)
-					<a href="{{ url('edit/' . $post->id) }}" class="btn btn-info">Edit</a><br>
-					<form action="{{ url('delete/' . $post->id) }}" method="POST">
-						{{ csrf_field() }}
-						{{ method_field('DELETE') }}
-						<button class="btn btn-danger" type="submit">Delete</button>
-					</form>
-				@endcan
-				<br>
+			@can('update', $post)
+				<a href="{{ url('edit/' . $post->id) }}">Edit</a><br>
+				<form action="{{ url('delete/' . $post->id) }}" method="POST">
+					{{ csrf_field() }}
+					{{ method_field('DELETE') }}
+					<button class="btn btn-danger" type="submit">Delete</button>
+				</form>
+			@endcan
+			<br>
 			<button class="btn favorite 
 						@if($user && $post->favorites->contains($user)) voted @endif"
 						data-id="{{ $post->id }}">Favorite
 			</button>
-			</p>
-	        <br>
 			<button id="upvote" data-type="upvote" data-id="{{ $post->id }}"
 					class="btn vote @if($user && $post->votedBy($user)->first() === 1) btn-primary @endif">
 				Upvote
@@ -39,9 +36,10 @@
 			<p> <strong>Upvotes</strong>: {{ $post->upvotes_count }}</p>
 			<p> <strong>Downvotes</strong>: {{ $post->downvotes_count }}</p>
 			<p> <strong>Favorites</strong>: {{ $post->favorites_count }}</p>
+			<a class="comments-icon" href="#"> <strong>Comments</strong>: {{ $post->comments_count }}</a>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row comments-container hidden">
 		<div class="col-md-6 bg-info">
 			<form action="{{ url('comment/' . $post->id) }}" method="POST" class="form-inline">
 				{{ CSRF_FIELD() }}

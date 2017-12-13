@@ -14,16 +14,16 @@ class PostController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'content' => 'required|string',
-            'category' => 'required',
-            'original' => 'nullable|boolean',
+            'content'   => 'required|string',
+            'category'  => 'required',
+            'original'  => 'nullable|boolean',
         ]);
 
     	Post::create([
-    		'content' => $request->content,
-    		'category_id' => $request->category,
-    		'original' => $request->original,
-            'user_id' => Auth::id()
+    		'content'       => $request->content,
+    		'category_id'   => $request->category,
+    		'original'      => $request->original,
+            'user_id'       => Auth::id()
     	]);
 
     	return redirect('submit');
@@ -31,9 +31,9 @@ class PostController extends Controller
 
     public function view($id)
     {
-        $post = Post::with('category', 'user')->find($id);
-        $user = Auth::user();
-        $comments = Comment::with('user')->where('post_id', $post->id)->get();
+        $post       = Post::with('category', 'user')->find($id);
+        $user       = Auth::user();
+        $comments   = Comment::with('user')->where('post_id', $post->id)->get();
 
         return view('pages.view', compact('post', 'user', 'comments'));
     }
@@ -46,14 +46,14 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'content' => 'required|string',
-            'original' => 'nullable|boolean',
+            'content'   => 'required|string',
+            'original'  => 'nullable|boolean',
         ]);
 
         $post = Post::find($id);
         $user = $request->user();
 
-        $post->content = $request->content;
+        $post->content  = $request->content;
         $post->original = $request->original ? 1 : null;
 
         $post->save();
@@ -71,9 +71,9 @@ class PostController extends Controller
 
     public function vote(Request $request)
     {
-        $type = $request->type;
-        $id = $request->id;
-        $post = Post::find($id);
+        $type   = $request->type;
+        $id     = $request->id;
+        $post   = Post::find($id);
 
         if ($type === 'upvote')
             $vote = 1;

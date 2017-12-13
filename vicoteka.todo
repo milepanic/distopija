@@ -35,6 +35,7 @@ FRONT PAGE:
  ✔ Delete comment @done (17-12-12 15:09)
  ☐ Reply to comment
  ☐ Upvote/Downvote comment
+ ✔ Show comments on click @done (17-12-13 16:47)
  ☐ Sidebar
  ☐ Footer
  ✔ Change between trending/new/top... @done (17-12-06 03:25)
@@ -56,15 +57,16 @@ OTHER:
  ☐ Notifications
  ☐ Moderators for categories
  ☐ Search
- ☐ Subscribe to user
+ ✔ Subscribe to user @done (17-12-13 17:26)
  ✔ Datatables @done (17-10-26 23:16)
  ✔ Seeder @done (17-10-25 22:49)
  ☐ Social Login
  ☐ Eager loading
  ☐ Cache queries on welcome page
- ☐ Validation
+ ✔ Validation @done (17-12-13 07:32)
  ☐ Mail
  ✔ Scope for posts @done (17-12-06 03:23)
  ☐ getRouteKeyName to slug for users
  ☐ Session flash
  ☐ Advanced pagination
+ ☐ Queries for tabs on wellcome page

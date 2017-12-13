@@ -29,18 +29,17 @@ class CategoryController extends Controller
 
     public function view($name)
     {
-        $category = Category::where('name', $name)->first();
-        $posts = Post::where('category_id', $category->id)->paginate(10);
-        $user = Auth::user();
+        $category   = Category::where('name', $name)->first();
+        $posts      = Post::where('category_id', $category->id)->paginate(10);
+        $user       = Auth::user();
 
         return view('pages.category', compact('category', 'posts', 'user'));
     }
 
-    // Blokirane kategorije se nece pojavljivati na pocetnoj strani, ali im se moze pristupiti
     public function block($id)
     {
-        $user = Auth::user();
-        $category = Category::find($id);
+        $user       = Auth::user();
+        $category   = Category::find($id);
 
         $category->users()->attach($user->id, ['blocked' => true]);
 
@@ -49,8 +48,8 @@ class CategoryController extends Controller
     // NAPRAVITI TOGGLE UMJESTO ATTACH DETACH
     public function unblock($id)
     {
-        $user = Auth::user();
-        $category = Category::find($id);
+        $user       = Auth::user();
+        $category   = Category::find($id);
 
         $category->users()->detach($user->id);
 
