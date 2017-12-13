@@ -28,8 +28,7 @@
 								<br>
 								<div class="row">
 									<div class="col-md-6 img-container">
-										<img id="image" class="display" 
-											{{--src=" asset('images/users/' . $user->id . '.png') --}}">
+										<img id="image" class="display">
 									</div>
 								</div>
 							</div>

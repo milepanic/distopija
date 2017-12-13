@@ -63,7 +63,7 @@
 							<div class="col-sm col-md-4">
 						      <div class="checkbox">
 						        <label class="col-md-4">
-						          <input type="checkbox" name="mods_only" value="1"> <p>Mods only - ne radi</p>
+						          <input type="checkbox" name="mods_only" value="1"> Mods only
 						        </label>
 						      </div>
 						    </div>						

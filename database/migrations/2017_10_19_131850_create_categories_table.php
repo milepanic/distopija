@@ -17,10 +17,10 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->boolean('nsfw')->nullable();
-            $table->boolean('cover_box')->nullable(); //box koji prekriva punchline
+            $table->boolean('cover_box')->nullable();
             $table->boolean('pictures')->nullable();
             $table->boolean('videos')->nullable();
-            // da li korisnici mogu postavljati viceve ili samo admini
+            $table->boolean('mods_only')->nullable();
             $table->boolean('approved')->nullable();
             $table->softDeletes();
             $table->timestamps();

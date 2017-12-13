@@ -26,6 +26,10 @@ class MessageController extends Controller
 
     public function new(Request $request)
     {
+        $request->validate([
+            'content' => 'required',
+        ]);
+
     	$message = Message::create([
     		'content' => $request->content
     	]);

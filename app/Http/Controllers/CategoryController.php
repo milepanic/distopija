@@ -11,12 +11,17 @@ class CategoryController extends Controller
 {
     public function create(Request $request)
     {
+        $request->validate([
+            'name' => 'required|unique:categories|min:3|alpha_num',
+        ]);
+
     	Category::create([
-    		'name' => $request->name,
-    		'nsfw' => $request->nsfw,
-    		'cover_box' => $request->cover_box,
-    		'pictures' => $request->pictures,
-    		'videos' => $request->videos
+    		'name'        => $request->name,
+    		'nsfw'        => $request->nsfw,
+    		'cover_box'   => $request->cover_box,
+    		'pictures'    => $request->pictures,
+    		'videos'      => $request->videos,
+            'mods_only'   => $request->mods_only
     	]);
 
     	return redirect('create');

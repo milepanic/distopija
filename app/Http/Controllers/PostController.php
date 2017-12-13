@@ -13,6 +13,12 @@ class PostController extends Controller
 {
     public function create(Request $request)
     {
+        $request->validate([
+            'content' => 'required|string',
+            'category' => 'required',
+            'original' => 'nullable|boolean',
+        ]);
+
     	Post::create([
     		'content' => $request->content,
     		'category_id' => $request->category,
@@ -39,6 +45,11 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'content' => 'required|string',
+            'original' => 'nullable|boolean',
+        ]);
+
         $post = Post::find($id);
         $user = $request->user();
 

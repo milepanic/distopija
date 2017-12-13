@@ -9,7 +9,7 @@ class Category extends Model
 {
 	use SoftDeletes;
 
-	protected $fillable = ['name', 'nsfw', 'cover_box', 'pictures', 'videos'];
+	protected $fillable = ['name', 'nsfw', 'cover_box', 'pictures', 'videos', 'mods_only'];
 
 	protected $dates = ['deleted_at'];
 

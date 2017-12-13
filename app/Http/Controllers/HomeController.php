@@ -61,6 +61,12 @@ class HomeController extends Controller
         if(!Auth::user()->id === $id)
             abort(403);
 
+        $request->validate([
+            'name' => 'required|min:3|alpha_num|max:255|unique:users,name,' . Auth::id(),
+            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::id(),
+            'description' => 'nullable|string|max:1000',
+        ]);
+
         $user = Auth::user()->find($id);
 
         $user->name = $request->name;
@@ -75,6 +81,10 @@ class HomeController extends Controller
 
     public function cropper(Request $request)
     {
+        $request->validate([
+            'croppedImage' => 'required|image',
+        ]);
+
         $image = $request->croppedImage;
         $user = $request->user();
         $location = public_path('images/users/' . $user->id . '.png');
