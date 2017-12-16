@@ -3,11 +3,11 @@
 Route::group(['middleware' => 'banned'], function () {
 
 	// PAGES
-	Route::get('profile/{name}', 'HomeController@profile');
 	Route::get('profile/edit/{name}', 'HomeController@edit');
 	Route::put('profile/edit/{id}', 'HomeController@update');
 	Route::post('profile/edit/cropper', 'HomeController@cropper');
 	Route::get('profile/{name}/blocked', 'HomeController@blocked');
+	Route::get('profile/{name}/{filter?}', 'HomeController@profile');
 	
 	// POSTS
 	Route::get('submit', 'HomeController@submit')->name('submit');

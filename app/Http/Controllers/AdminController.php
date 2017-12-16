@@ -16,7 +16,7 @@ class AdminController extends Controller
         $postCount      = Post::count();
         $originalCount  = Post::where('original', '=', '1')->count();
 
-        return view('admin.dashboard', compact('userCount', 'postCount', 'originalPostCount'));
+        return view('admin.dashboard', compact('userCount', 'postCount', 'originalCount'));
     }
 
     public function users()

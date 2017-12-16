@@ -18,9 +18,13 @@ class HomeController extends Controller
         $user = Auth::user();
 
         if($user)
-            $posts = Post::notBlocked()->filter($filter)->paginate(10);
+            $posts = Post::notBlocked()
+                    ->filter($filter, $user)
+                    ->paginate(10);
         else
-            $posts = Post::with('user', 'category')->filter($filter)->paginate(10);
+            $posts = Post::with('user', 'category')
+                    ->filter($filter)
+                    ->paginate(10);
 
         return request()->ajax() ? 
             view('includes.jokes', compact('user', 'posts'))
@@ -28,23 +32,30 @@ class HomeController extends Controller
             view('pages.welcome', compact('user', 'posts'));
     }
 
-    public function profile($slug)
+    public function profile($slug, $filter = null)
     {
         $user = User::where('slug', $slug)
-                        ->with('posts')
-                        ->withCount([
-                            'posts',
-                            'subscription',
-                            'posts as original_count' => function ($query) {
-                                $query->where('original', 1);
-                            },
-                            'favoritePosts as favorite_count' => function ($query) {
-                                $query->whereRaw('favorites.user_id = users.id');
-                            }
-                        ])
-                        ->first();
+                ->withCount([
+                    'posts',
+                    'subscription',
+                    'posts as original_count' => function ($query) {
+                        $query->where('original', 1);
+                    },
+                    'favoritePosts as favorite_count' => function ($query) {
+                        $query->whereRaw('favorites.user_id = users.id');
+                    }
+                ])
+                ->first();
 
-        return view('pages.profile', compact('user', 'posts'));
+        $posts = Post::where('user_id', $user->id)
+                ->profileFilter($filter, $user)
+                ->latest()
+                ->paginate(10);
+
+        return request()->ajax() ?
+            view('includes.jokes', compact('user', 'posts'))
+            :
+            view('pages.profile', compact('user', 'posts'));
     }
 
     public function edit($slug)

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +15,7 @@ class CategoryController extends Controller
             'name' => 'required|unique:categories|min:3|alpha_num',
         ]);
 
-    	Category::create([
+    	$category = Category::create([
     		'name'        => $request->name,
     		'nsfw'        => $request->nsfw,
     		'cover_box'   => $request->cover_box,
@@ -23,6 +23,10 @@ class CategoryController extends Controller
     		'videos'      => $request->videos,
             'mods_only'   => $request->mods_only
     	]);
+
+        $user = $request->user();
+
+        $category->users()->attach($user->id, ['moderator' => true]);        
 
     	return redirect('create');
     }
@@ -38,20 +42,20 @@ class CategoryController extends Controller
 
     public function block($id)
     {
-        $user       = Auth::user();
+        $user       = Auth::id();
         $category   = Category::find($id);
 
-        $category->users()->attach($user->id, ['blocked' => true]);
+        $category->users()->attach($user, ['blocked' => true]);
 
         return redirect('/');        
     }
     // NAPRAVITI TOGGLE UMJESTO ATTACH DETACH
     public function unblock($id)
     {
-        $user       = Auth::user();
+        $user       = Auth::id();
         $category   = Category::find($id);
 
-        $category->users()->detach($user->id);
+        $category->users()->toggle($user);
 
         return back();        
     }

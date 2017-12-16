@@ -70,7 +70,7 @@ class Post extends Model
                     ]);
     }
 
-    public function scopeFilter($query, $var)
+    public function scopeFilter($query, $var, $user)
     {
         switch ($var) {
             case 'new':
@@ -83,11 +83,36 @@ class Post extends Model
                 return $query->where('original', true);
                 break;
             case 'subscriptions':
-                
+                $subs = $user->subscription()
+                             ->get()
+                             ->pluck('id')
+                             ->toArray();
+
+                return $query->whereIn('user_id', $subs)
+                             ->latest();
                 break;
             // case: trending
             default:
                 
+                break;
+        }
+    }
+
+    public function scopeProfileFilter($query, $var, $user)
+    {
+        switch ($var) {
+            case 'original':
+                return $query->where('original', true);
+                break;
+            case 'favorites':
+                $favorites = $user->favoritePosts()
+                             ->get()
+                             ->pluck('id')
+                             ->toArray();
+
+                return $query->whereIn('id', $favorites);
+            default:
+                return $query;
                 break;
         }
     }

@@ -41,7 +41,7 @@
                         <i class="fa fa-star fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">{{ $originalPostCount }}</div>
+                        <div class="huge">{{ $originalCount }}</div>
                         <div>Original Posts</div>
                     </div>
                 </div>
