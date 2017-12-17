@@ -138,5 +138,36 @@ $(document).ready(function() {
 		});
 	});
 
+	// Showing user subscribed to
+	// $('.subscribed-to').click(function(e) {
+	// 	e.preventDefault();
+	// 	$('.nav').hide();
+
+	// 	var slug = $(this).parent().data('slug');
+
+	// 	$.ajax({
+	// 		url: '/profile/' + slug + '/subscribed',
+	// 		type: 'GET',
+	// 		success: function(data) {
+	// 			$("#user-data").html(data);
+	// 		}
+	// 	});
+	// });
+
+	// // Showing user subscribers
+	// $('.subscribers').click(function(e) {
+	// 	e.preventDefault();
+	// 	$('.nav').hide();
+
+	// 	var slug = $(this).parent().data('slug');
+
+	// 	$.ajax({
+	// 		url: '/profile/' + slug + '/subscribers',
+	// 		type: 'GET',
+	// 		success: function(data) {
+	// 			$("#user-data").html(data);
+	// 		}
+	// 	});
+	// });
 
 });

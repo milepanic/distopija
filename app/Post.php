@@ -56,18 +56,23 @@ class Post extends Model
                     ->pluck(['id'])
                     ->toArray();
 
-        return $query->whereNotIn('category_id', $blocked)
-                    ->with(['comments.user', 'user', 'category', 'favorites', 'votes'])
-                    ->withCount([
-                        'favorites',
-                        'comments',
-                        'votes as upvotes_count' => function ($query) {
-                            $query->where('vote', 1);
-                        },
-                        'votes as downvotes_count' => function ($query) {
-                            $query->where('vote', -1);
-                        }
-                    ]);
+        return $query->whereNotIn('category_id', $blocked);                    
+    }
+
+    public function scopeEagerLoad($query)
+    {
+        return $query
+            ->with(['comments.user', 'user', 'category', 'favorites', 'votes'])
+            ->withCount([
+                'favorites',
+                'comments',
+                'votes as upvotes_count' => function ($query) {
+                    $query->where('vote', 1);
+                },
+                'votes as downvotes_count' => function ($query) {
+                    $query->where('vote', -1);
+                }
+            ]);
     }
 
     public function scopeFilter($query, $var, $user)

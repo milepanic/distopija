@@ -71,8 +71,8 @@ class PostController extends Controller
 
     public function vote(Request $request)
     {
-        $type   = $request->type;
         $id     = $request->id;
+        $type   = $request->type;
         $post   = Post::find($id);
 
         if ($type === 'upvote')

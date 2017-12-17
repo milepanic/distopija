@@ -19,11 +19,13 @@ class HomeController extends Controller
 
         if($user)
             $posts = Post::notBlocked()
+                    ->eagerLoad()
                     ->filter($filter, $user)
                     ->paginate(10);
         else
             $posts = Post::with('user', 'category')
-                    ->filter($filter)
+                    ->eagerLoad()
+                    ->filter($filter, null)
                     ->paginate(10);
 
         return request()->ajax() ? 
@@ -38,8 +40,11 @@ class HomeController extends Controller
                 ->withCount([
                     'posts',
                     'subscription',
+                    'subscription as subscribers_count' => function ($query) {
+                        $query->whereRaw('subscription.user_id = users.id');
+                    },
                     'posts as original_count' => function ($query) {
-                        $query->where('original', 1);
+                        $query->where('original', true);
                     },
                     'favoritePosts as favorite_count' => function ($query) {
                         $query->whereRaw('favorites.user_id = users.id');
@@ -48,6 +53,7 @@ class HomeController extends Controller
                 ->first();
 
         $posts = Post::where('user_id', $user->id)
+                ->eagerLoad()
                 ->profileFilter($filter, $user)
                 ->latest()
                 ->paginate(10);
@@ -56,6 +62,23 @@ class HomeController extends Controller
             view('includes.jokes', compact('user', 'posts'))
             :
             view('pages.profile', compact('user', 'posts'));
+    }
+
+    public function subscribed($slug)
+    {
+        $user       = User::where('slug', $slug)->withCount('subscription')->first();
+        $subscribed = $user->subscription()->paginate(10);
+
+        return view('includes.subscribers', compact('user', 'subscribed'));
+    }
+
+    public function subscribers($slug)
+    {
+        $user       = User::where('slug', $slug)->withCount('subscription')->first();
+        $query      = DB::table('subscription')->where('user_id', 1)->pluck('subscriber_id')->toArray();
+        $subscribed = User::whereIn('id', $query)->paginate(10);
+
+        return view('includes.subscribers', compact('user', 'subscribed'));
     }
 
     public function edit($slug)
@@ -97,11 +120,10 @@ class HomeController extends Controller
             'croppedImage' => 'required|image',
         ]);
 
-        $image      = $request->croppedImage;
-        $user       = $request->user();
-        $location   = public_path('images/users/' . $user->id . '.png');
-
-        Image::make($image)->resize(300, 300)->encode('png')->save($location);
+        Image::make($request->croppedImage)
+            ->resize(300, 300)
+            ->encode('png')
+            ->save(public_path('images/users/' . Auth::id() . '.png'));
 
         return response()->json('Operacija uspjesna!');
     }

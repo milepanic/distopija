@@ -26,7 +26,7 @@
                                 		class="text-danger"
                                 	@endif
                                 >
-                                	{{ $user->name }}
+                                	<a href="{{ url('profile/' . $user->slug) }}">{{ $user->name }}</a>
                                 </td>
                                 <td>{{ $user->points }}</td>
                                 <td>

@@ -39,6 +39,7 @@ FRONT PAGE:
  ☐ Sidebar
  ☐ Footer
  ✔ Change between trending/new/top... @done (17-12-06 03:25)
+ ☐ Stop not logged in users from voting, commenting...
 
  PROFILE:
   ✔ User info @done (17-11-07 21:09)
@@ -61,11 +62,17 @@ OTHER:
  ✔ Datatables @done (17-10-26 23:16)
  ✔ Seeder @done (17-10-25 22:49)
  ☐ Social Login
- ☐ Eager loading
+ ✔ Eager loading @done (17-12-16 17:24)
  ☐ Cache queries on welcome page
  ✔ Validation @done (17-12-13 07:32)
  ☐ Mail
  ✔ Scope for posts @done (17-12-06 03:23)
  ☐ Session flash
  ☐ Advanced pagination
+
+FIX:
+ ☐ Cropper - sometimes doesn't work
  ☐ Queries for tabs on wellcome page
+ ☐ Eager loading for upvotes and downvotes
+ ☐ Turn on mysql strict mode - turned off because of groupBy for inbox
+ ☐ Load comments with AJAX ??
