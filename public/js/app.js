@@ -35,6 +35,9 @@ $(document).ready(function() {
 			id: $(this).data('id')
 		};
 
+		// user - bool logged in, defined in jokes.blade.php 
+		if(!user) return;
+
 		if($(this).data('type') === 'upvote') {
 			if($('#downvote').hasClass('btn-danger'))
 				$('#downvote').removeClass('btn-danger');
@@ -64,6 +67,8 @@ $(document).ready(function() {
 		var vote = {
 			id: $(this).data('id')
 		};
+
+		if(!user) return;
 
 		$(this).toggleClass('voted');
 
@@ -138,36 +143,22 @@ $(document).ready(function() {
 		});
 	});
 
-	// Showing user subscribed to
-	// $('.subscribed-to').click(function(e) {
-	// 	e.preventDefault();
-	// 	$('.nav').hide();
+	$('.report-post').click(function(e) {
+		e.preventDefault();
 
-	// 	var slug = $(this).parent().data('slug');
-
-	// 	$.ajax({
-	// 		url: '/profile/' + slug + '/subscribed',
-	// 		type: 'GET',
-	// 		success: function(data) {
-	// 			$("#user-data").html(data);
-	// 		}
-	// 	});
-	// });
-
-	// // Showing user subscribers
-	// $('.subscribers').click(function(e) {
-	// 	e.preventDefault();
-	// 	$('.nav').hide();
-
-	// 	var slug = $(this).parent().data('slug');
-
-	// 	$.ajax({
-	// 		url: '/profile/' + slug + '/subscribers',
-	// 		type: 'GET',
-	// 		success: function(data) {
-	// 			$("#user-data").html(data);
-	// 		}
-	// 	});
-	// });
+		var reason = prompt("Unesite razlog prijave\n", "Razlog");
+		var id = $(this).parent().data('id');
+		$.ajax({
+			url: '/report/' + id,
+			type: 'POST',
+			data: {'reason': reason},
+			success: function() {
+				alert('Post je uspesno prijavljen');
+			},
+			error: function() {
+				alert('Dogodila se greska, pokusajte ponovo');
+			}
+		});
+	});
 
 });

@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 bg-warning">			
+		<div class="col-md-6 bg-warning" data-id="{{ $post->id }}">			
 			<p> <strong>Joke</strong>: {{ $post->content }} </p>
 			@if($post->original) <p> <strong>Original</strong> </p> @endif
  			<p> <strong>User</strong>: <a href="{{ url('profile/' . $post->user->slug) }}"> {{ $post->user->name }} </a> </p>
@@ -16,7 +16,7 @@
 				</form>
 			@endcan
 			<br>
-			<button class="btn favorite 
+			<button class="btn favorite
 						@if($user && $post->favorites->contains($user)) voted @endif"
 						data-id="{{ $post->id }}">Favorite
 			</button>
@@ -29,8 +29,8 @@
 				Downvote
 			</button>
 			<br><br>
-			<p> <a href="{{ url('block/' . $post->category->id) }}">Block Category</a> </p>
-			<p> Report // napraviti u admin panelu tabelu u koju se upisuje korisnik, post i razlog </p>
+			<p> <a class="block-category" href="{{ url('block/' . $post->category->id) }}">Blokiraj kategoriju</a> </p>
+			<a href="#" class="report-post">Report</a>
 			<p> Share </p>
 			<p> ------- </p>
 			<p> <strong>Upvotes</strong>: {{ $post->upvotes_count }}</p>
@@ -47,7 +47,7 @@
 	                <textarea name="comment" class="form-control" placeholder="Komentarisi" required></textarea>
 	            </div>
 	            <div class="form-group">
-	                <button type="submit" class="btn btn-default">Add</button>
+	                <button type="submit" class="btn btn-default add-comment">Add</button>
 	            </div>
 	        </form><br><br>
 	
@@ -85,3 +85,7 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	
+</script>

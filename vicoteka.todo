@@ -29,7 +29,7 @@ FRONT PAGE:
  ✔ Upvote/Downvote @done (17-11-17 19:19)
  ✔ Favorite @done (17-11-15 00:08)
  ✔ Visit/Block Category @done (17-11-03 20:48)
- ☐ Report post
+ ✔ Report post @done (17-12-19 15:41)
  ☐ Share on social media
  ✔ Edit comment @done (17-12-12 14:20)
  ✔ Delete comment @done (17-12-12 15:09)
@@ -39,7 +39,7 @@ FRONT PAGE:
  ☐ Sidebar
  ☐ Footer
  ✔ Change between trending/new/top... @done (17-12-06 03:25)
- ☐ Stop not logged in users from voting, commenting...
+ ✔ Stop guests from voting, commenting... @done (17-12-19 15:13)
 
  PROFILE:
   ✔ User info @done (17-11-07 21:09)
@@ -50,6 +50,7 @@ FRONT PAGE:
   ✔ Profile picture @done (17-11-07 20:41)
   ✔ JS Cropper @done (17-11-25 03:14)
   ✔ See blocked categories and unblock @done (17-11-15 01:22)
+  ✔ See list of subscribed users and users that profile subscribed to @done (17-12-17 16:51)
   ☐ User points
   ☐ Medals
 
