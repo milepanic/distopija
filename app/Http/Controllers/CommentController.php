@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Comment;
 use App\CommentVote;
-use Auth;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -22,6 +22,17 @@ class CommentController extends Controller
         ]);
 
     	return redirect()->back();
+    }
+
+    public function read($id)
+    {
+        $comments = Comment::where('post_id', $id)
+                        ->with('user')
+                        ->get();
+
+        return response()->json([
+            'html' => view('includes.comments', compact('comments'))->render()
+        ]);
     }
 
     public function update(Request $request, $id, $type)

@@ -7,7 +7,7 @@ $(document).ready(function() {
         }
     });
 
-	// function for changing tabs on wellcome page
+	// changing tabs on wellcome page
 	$(".nav-tabs li a").click(function(e) {
 		e.preventDefault();
 		var type = $(this).data('type');
@@ -28,7 +28,7 @@ $(document).ready(function() {
 		});
 	});
 
-	// function for voting on posts
+	// voting for posts
 	$('.vote').click(function() {
 		var vote = {
 			type: $(this).data('type'),
@@ -62,7 +62,7 @@ $(document).ready(function() {
 		});
 	});
 
-	// function for favoriting posts
+	// favoriting posts
 	$('.favorite').click(function() {
 		var vote = {
 			id: $(this).data('id')
@@ -85,10 +85,29 @@ $(document).ready(function() {
 		});
 	});
 
+	// showing comments
 	$('.comments-icon').on('click', function(e) {
 		e.preventDefault();
-		// show/hide comment section for a post
-		$(this).parents().eq(2).find('.comments-container').toggleClass('hidden');
+
+		var comments_container = $(this).parents().eq(2).find('.comments-container');
+		comments_container.toggleClass('hidden');
+
+		if(comments_container.hasClass('hidden'))
+			return;
+
+		var post_id = $(this).parent().data('id');
+
+		$.ajax({
+			method: 'GET',
+			url: 'comments/get/' + post_id,
+			success: function(data) {
+				var comments_box = comments_container.find('.comments-box');
+				comments_box.html(data.html);
+			},
+			error: function() {
+				/* Act on the event */
+			}
+		});
 	});
 
 	// editing comments
@@ -143,6 +162,7 @@ $(document).ready(function() {
 		});
 	});
 
+	// reporting posts
 	$('.report-post').click(function(e) {
 		e.preventDefault();
 

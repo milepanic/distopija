@@ -24,13 +24,16 @@ ADMIN PANEL:
    ☐ Edit every field
 
 FRONT PAGE:
+ ☐ Queries for tabs on wellcome page
  ✔ Pagination @done (17-10-30 20:16)
  ✔ Edit posts @done (17-10-30 20:50)
+ ☐ Return vote count when voting
  ✔ Upvote/Downvote @done (17-11-17 19:19)
  ✔ Favorite @done (17-11-15 00:08)
  ✔ Visit/Block Category @done (17-11-03 20:48)
  ✔ Report post @done (17-12-19 15:41)
  ☐ Share on social media
+ ✔ Load comments with AJAX @done (17-12-22 21:33)
  ✔ Edit comment @done (17-12-12 14:20)
  ✔ Delete comment @done (17-12-12 15:09)
  ☐ Reply to comment
@@ -73,7 +76,7 @@ OTHER:
 
 FIX:
  ☐ Cropper - sometimes doesn't work
- ☐ Queries for tabs on wellcome page
  ☐ Eager loading for upvotes and downvotes
  ☐ Turn on mysql strict mode - turned off because of groupBy for inbox
- ☐ Load comments with AJAX ??
+ ☐ JS functions Edit and Delete for comments not working
+ ☐ Post comments with AJAX

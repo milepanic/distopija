@@ -49,43 +49,8 @@
 	            <div class="form-group">
 	                <button type="submit" class="btn btn-default add-comment">Add</button>
 	            </div>
-	        </form><br><br>
-	
-	        @forelse($post->comments as $comment)
-				
-	        	<div class="comment-div">
-	        		<div class="comment-box">
-	        			<p data-id="{{ $comment->id }}" class="comment">{{ $comment->comment }}</p>
-	        		</div><br>
-		        	<p> Postavio: {{ $comment->user->name }} </p>
-		        	<p> Datum: {{ \Carbon\Carbon::parse($comment->created_at)->diffForHumans() }} </p>
-		        	<p>
-		        		<form action="{{ url('comment/' . $comment->id . '/up') }}" method="POST">
-		        			{{ csrf_field() }}
-		        			<button type="submit" class="btn btn-primary">Upvote</button>
-		        		</form>
-		        		<form action="{{ url('comment/' . $comment->id . '/down') }}" method="POST">
-		        			{{ csrf_field() }}
-		        			<button type="submit" class="btn btn-danger">Downvote</button>
-		        		</form>
-		        	</p>
-		        	@can('edit', $comment)
-		        		<a class="edit" href="#">Edit</a>
-			        	<a class="delete" href="#">Delete</a>
-			        @endcan
-		        	<hr>
-	        	</div>
-
-	        @empty
-
-	        	<p>No comment</p>
-
-	        @endforelse
-
+	        </form>
+	        <div class="row comments-box"><!-- Comments show here --></div>
 		</div>
 	</div>
 </div>
-
-<script>
-	
-</script>

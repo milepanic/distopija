@@ -31,6 +31,7 @@ Route::group(['middleware' => 'banned'], function () {
 	Route::get('unblock/{id}', 					'CategoryController@unblock');
 
 	// COMMENTS
+	Route::get('comments/get/{id}', 			'CommentController@read');
 	Route::post('comment/{id}', 				'CommentController@create');
 	Route::patch('comment/edit/{id}', 			'CommentController@edit');
 	Route::delete('comment/delete/{id}', 		'CommentController@delete');
@@ -42,12 +43,15 @@ Route::group(['middleware' => 'banned'], function () {
 	// SUBSCRIBE
 	Route::post('subscribe/{id}', 				'UserController@subscribe');
 
+
 	// INBOX
 	Route::group(['prefix' => 'inbox'], function() {
+
 		Route::get('/', 						'MessageController@inbox')->name('inbox');
 		Route::get('compose/{id?}', 			'MessageController@compose');
 		Route::post('new', 						'MessageController@new');
 		Route::get('view/{id}', 				'MessageController@messages');
+
 	});
 
 	Auth::routes();

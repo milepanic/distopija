@@ -62,7 +62,7 @@ class Post extends Model
     public function scopeEagerLoad($query)
     {
         return $query
-            ->with(['comments.user', 'user', 'category', 'favorites', 'votes'])
+            ->with(['user', 'category', 'favorites', 'votes'])
             ->withCount([
                 'favorites',
                 'comments',
