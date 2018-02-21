@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 bg-warning" data-id="{{ $post->id }}">			
+		<div class="col-md-6 bg-warning" data-id="{{ $post->id }}">
 			<p> <strong>Joke</strong>: {{ $post->content }} </p>
 			@if($post->original) <p> <strong>Original</strong> </p> @endif
  			<p> <strong>User</strong>: <a href="{{ url('profile/' . $post->user->slug) }}"> {{ $post->user->name }} </a> </p>
@@ -21,11 +21,20 @@
 						data-id="{{ $post->id }}">Favorite
 			</button>
 			<button id="upvote" data-type="upvote" data-id="{{ $post->id }}"
-					class="btn vote @if($user && $post->votedBy($user)->first() === 1) btn-primary @endif">
+					class="btn vote 
+					@if($user && $post->votes->where('id', $user->id)->first() 
+							&& $post->votes->where('id', $user->id)->first()->pivot->vote === 1) 
+						btn-primary 
+					@endif">
 				Upvote
+
 			</button>
 			<button id="downvote" data-type="downvote" data-id="{{ $post->id }}"
-					class="btn vote @if($user && $post->votedBy($user)->first() === -1) btn-danger @endif">
+					class="btn vote 
+					@if($user && $post->votes->where('id', $user->id)->first() 
+							&& $post->votes->where('id', $user->id)->first()->pivot->vote === -1) 
+						btn-danger 
+					@endif">
 				Downvote
 			</button>
 			<br><br>

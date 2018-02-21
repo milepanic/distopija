@@ -1,3 +1,4 @@
+{{-- {{ dd($posts) }} --}}
 @foreach($posts as $post)
 
 	@include('includes.joke')
